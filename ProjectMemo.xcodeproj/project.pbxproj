@@ -9,22 +9,36 @@
 /* Begin PBXBuildFile section */
 		AD6CCA6828BF2C2700C6C5A8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6CCA6728BF2C2700C6C5A8 /* AppDelegate.swift */; };
 		AD6CCA6A28BF2C2700C6C5A8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6CCA6928BF2C2700C6C5A8 /* SceneDelegate.swift */; };
-		AD6CCA6C28BF2C2700C6C5A8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6CCA6B28BF2C2700C6C5A8 /* ViewController.swift */; };
 		AD6CCA6F28BF2C2700C6C5A8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD6CCA6D28BF2C2700C6C5A8 /* Main.storyboard */; };
 		AD6CCA7128BF2C2A00C6C5A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD6CCA7028BF2C2A00C6C5A8 /* Assets.xcassets */; };
 		AD6CCA7428BF2C2A00C6C5A8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD6CCA7228BF2C2A00C6C5A8 /* LaunchScreen.storyboard */; };
 		AD6CCA7D28BF2C8D00C6C5A8 /* Hero in Frameworks */ = {isa = PBXBuildFile; productRef = AD6CCA7C28BF2C8D00C6C5A8 /* Hero */; };
+		AD6CCA8128BF30FF00C6C5A8 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6CCA8028BF30FF00C6C5A8 /* BaseViewController.swift */; };
+		AD6CCA8328BF315E00C6C5A8 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6CCA8228BF315E00C6C5A8 /* BaseView.swift */; };
+		AD6CCA8928BF3F7000C6C5A8 /* MemoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6CCA8828BF3F7000C6C5A8 /* MemoListViewController.swift */; };
+		AD6CCA8B28BF3F9800C6C5A8 /* MemoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6CCA8A28BF3F9800C6C5A8 /* MemoListView.swift */; };
+		AD6CCA8E28BF400600C6C5A8 /* WalkThroughView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6CCA8D28BF400600C6C5A8 /* WalkThroughView.swift */; };
+		AD6CCA9128BF40D400C6C5A8 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6CCA9028BF40D400C6C5A8 /* SearchViewController.swift */; };
+		AD6CCA9428BF411200C6C5A8 /* EditingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6CCA9328BF411200C6C5A8 /* EditingViewController.swift */; };
+		AD6CCA9628BF413200C6C5A8 /* EditingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6CCA9528BF413200C6C5A8 /* EditingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		AD6CCA6428BF2C2700C6C5A8 /* ProjectMemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProjectMemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD6CCA6728BF2C2700C6C5A8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AD6CCA6928BF2C2700C6C5A8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		AD6CCA6B28BF2C2700C6C5A8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		AD6CCA6E28BF2C2700C6C5A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AD6CCA7028BF2C2A00C6C5A8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AD6CCA7328BF2C2A00C6C5A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AD6CCA7528BF2C2A00C6C5A8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AD6CCA8028BF30FF00C6C5A8 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		AD6CCA8228BF315E00C6C5A8 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		AD6CCA8828BF3F7000C6C5A8 /* MemoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoListViewController.swift; sourceTree = "<group>"; };
+		AD6CCA8A28BF3F9800C6C5A8 /* MemoListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoListView.swift; sourceTree = "<group>"; };
+		AD6CCA8D28BF400600C6C5A8 /* WalkThroughView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkThroughView.swift; sourceTree = "<group>"; };
+		AD6CCA9028BF40D400C6C5A8 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		AD6CCA9328BF411200C6C5A8 /* EditingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingViewController.swift; sourceTree = "<group>"; };
+		AD6CCA9528BF413200C6C5A8 /* EditingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,13 +74,68 @@
 			children = (
 				AD6CCA6728BF2C2700C6C5A8 /* AppDelegate.swift */,
 				AD6CCA6928BF2C2700C6C5A8 /* SceneDelegate.swift */,
-				AD6CCA6B28BF2C2700C6C5A8 /* ViewController.swift */,
+				AD6CCA7F28BF30C200C6C5A8 /* BaseComponents */,
+				AD6CCA8C28BF3FEE00C6C5A8 /* WalkThroughView */,
+				AD6CCA8728BF3F5300C6C5A8 /* MemoList */,
+				AD6CCA8F28BF408B00C6C5A8 /* SearchMemo */,
+				AD6CCA9228BF40F200C6C5A8 /* EditingView */,
 				AD6CCA6D28BF2C2700C6C5A8 /* Main.storyboard */,
 				AD6CCA7028BF2C2A00C6C5A8 /* Assets.xcassets */,
 				AD6CCA7228BF2C2A00C6C5A8 /* LaunchScreen.storyboard */,
 				AD6CCA7528BF2C2A00C6C5A8 /* Info.plist */,
 			);
 			path = ProjectMemo;
+			sourceTree = "<group>";
+		};
+		AD6CCA7E28BF30AB00C6C5A8 /* Customs */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Customs;
+			sourceTree = "<group>";
+		};
+		AD6CCA7F28BF30C200C6C5A8 /* BaseComponents */ = {
+			isa = PBXGroup;
+			children = (
+				AD6CCA7E28BF30AB00C6C5A8 /* Customs */,
+				AD6CCA8028BF30FF00C6C5A8 /* BaseViewController.swift */,
+				AD6CCA8228BF315E00C6C5A8 /* BaseView.swift */,
+			);
+			path = BaseComponents;
+			sourceTree = "<group>";
+		};
+		AD6CCA8728BF3F5300C6C5A8 /* MemoList */ = {
+			isa = PBXGroup;
+			children = (
+				AD6CCA8828BF3F7000C6C5A8 /* MemoListViewController.swift */,
+				AD6CCA8A28BF3F9800C6C5A8 /* MemoListView.swift */,
+			);
+			path = MemoList;
+			sourceTree = "<group>";
+		};
+		AD6CCA8C28BF3FEE00C6C5A8 /* WalkThroughView */ = {
+			isa = PBXGroup;
+			children = (
+				AD6CCA8D28BF400600C6C5A8 /* WalkThroughView.swift */,
+			);
+			path = WalkThroughView;
+			sourceTree = "<group>";
+		};
+		AD6CCA8F28BF408B00C6C5A8 /* SearchMemo */ = {
+			isa = PBXGroup;
+			children = (
+				AD6CCA9028BF40D400C6C5A8 /* SearchViewController.swift */,
+			);
+			path = SearchMemo;
+			sourceTree = "<group>";
+		};
+		AD6CCA9228BF40F200C6C5A8 /* EditingView */ = {
+			isa = PBXGroup;
+			children = (
+				AD6CCA9328BF411200C6C5A8 /* EditingViewController.swift */,
+				AD6CCA9528BF413200C6C5A8 /* EditingView.swift */,
+			);
+			path = EditingView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -146,7 +215,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD6CCA6C28BF2C2700C6C5A8 /* ViewController.swift in Sources */,
+				AD6CCA8128BF30FF00C6C5A8 /* BaseViewController.swift in Sources */,
+				AD6CCA9428BF411200C6C5A8 /* EditingViewController.swift in Sources */,
+				AD6CCA8928BF3F7000C6C5A8 /* MemoListViewController.swift in Sources */,
+				AD6CCA9128BF40D400C6C5A8 /* SearchViewController.swift in Sources */,
+				AD6CCA8E28BF400600C6C5A8 /* WalkThroughView.swift in Sources */,
+				AD6CCA9628BF413200C6C5A8 /* EditingView.swift in Sources */,
+				AD6CCA8B28BF3F9800C6C5A8 /* MemoListView.swift in Sources */,
+				AD6CCA8328BF315E00C6C5A8 /* BaseView.swift in Sources */,
 				AD6CCA6828BF2C2700C6C5A8 /* AppDelegate.swift in Sources */,
 				AD6CCA6A28BF2C2700C6C5A8 /* SceneDelegate.swift in Sources */,
 			);

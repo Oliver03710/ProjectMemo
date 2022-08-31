@@ -1,5 +1,5 @@
 //
-//  BaseView.swift
+//  BaseTableViewCell.swift
 //  ProjectMemo
 //
 //  Created by Junhee Yoon on 2022/08/31.
@@ -7,12 +7,11 @@
 
 import UIKit
 
-class BaseView: UIView {
+class BaseTableViewCell: UITableViewCell {
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.backgroundColor = .systemBackground
-        configureUI()
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setUI()
         setConstraints()
     }
     
@@ -20,8 +19,8 @@ class BaseView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureUI() { }
+    func setUI() { }
     
     func setConstraints() { }
-    
+
 }

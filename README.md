@@ -27,4 +27,4 @@
 |2|타이틀|String|
 |3|세부내용|String|
 |4|날짜|Date|
-|5||Date|
+|5|고정 여부|Bool|

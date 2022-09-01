@@ -13,7 +13,7 @@ final class MemoListViewController: BaseViewController {
     
     private let memoListView = MemoListView()
     private let searchController = SearchViewController(searchResultsController: nil)
-    
+    private var searchResults:[String] = []
     
     // MARK: - Init
     
@@ -26,11 +26,11 @@ final class MemoListViewController: BaseViewController {
     }
     
     
-    // MARK: - Seleectors
+    // MARK: - Selectors
     
-    @objc func testing() {
-        let vc = WalkThroughViewController()
-        transitionViewController(vc, transitionStyle: .presentOverFullScreen)
+    @objc func createNewMemo() {
+        let vc = EditingViewController()
+        transitionViewController(vc, transitionStyle: .push)
     }
     
     
@@ -39,24 +39,40 @@ final class MemoListViewController: BaseViewController {
     override func configureUI() {
         configureNavi()
         configureTableView()
+        showWalkThrough()
+        configureToolBars()
     }
     
     private func configureNavi() {
         
-        showNaviBars(naviTitle: "메모", naviBarTintColor: .systemBackground)
+        showNaviBars(naviTitle: "메모", naviBarTintColor: .orange)
         navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.prefersLargeTitles = true
         
         self.navigationItem.searchController = searchController
         self.navigationItem.hidesSearchBarWhenScrolling = false
-        
-        let button = UIBarButtonItem(image: UIImage(systemName: "applelogo"), style: .plain, target: self, action: #selector(testing))
-        navigationItem.rightBarButtonItems = [button]
     }
     
     private func configureTableView() {
         memoListView.tableView.dataSource = self
         memoListView.tableView.delegate = self
+    }
+    
+    func showWalkThrough() {
+        let vc = WalkThroughViewController()
+        transitionViewController(vc, transitionStyle: .presentOverFullScreen)
+    }
+    
+    func configureToolBars() {
+        navigationController?.isToolbarHidden = false
+        navigationController?.toolbar.tintColor = .orange
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: self, action: nil)
+
+        let loveButton = UIBarButtonItem(image: UIImage(systemName: "square.and.pencil"), style: .plain, target: self, action: #selector(createNewMemo))
+
+        let arr: [Any] = [flexibleSpace, loveButton]
+
+        setToolbarItems(arr as? [UIBarButtonItem] ?? [UIBarButtonItem](), animated: true)
     }
 
 }
@@ -77,6 +93,47 @@ extension MemoListViewController: UITableViewDelegate {
         label.font = .boldSystemFont(ofSize: 24)
         return label
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = EditingViewController()
+        transitionViewController(vc, transitionStyle: .push)
+    }
+    
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let pinned = UIContextualAction(style: .normal, title: "") { action, view, completionHandler in
+            
+            // Realm Data Update
+//            self.repository.updateFavourite(item: self.tasks[indexPath.row])
+//            self.fetchRealm()
+            
+        }
+        
+        let image = indexPath.row % 2 == 0 ? "pin.slash.fill" : "pin.fill"
+        pinned.image = UIImage(systemName: image)
+        pinned.backgroundColor = .orange
+        
+        return UISwipeActionsConfiguration(actions: [pinned])
+        
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let delete = UIContextualAction(style: .normal, title: "") { action, view, completionHandler in
+            
+            // Realm Data Update
+//            self.repository.updateFavourite(item: self.tasks[indexPath.row])
+//            self.fetchRealm()
+            
+        }
+        
+        delete.image = UIImage(systemName: "trash.fill")
+        delete.backgroundColor = .red
+        
+        return UISwipeActionsConfiguration(actions: [delete])
+        
+    }
+
 }
 
 
@@ -99,7 +156,20 @@ extension MemoListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 90
+        return 60
     }
     
+}
+
+
+// MARK: - Extension: UISearchResultsUpdating
+
+extension MemoListViewController: UISearchResultsUpdating {
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        
+        guard let text = searchController.searchBar.text else { return }
+        searchResults = ["label", "ab", "bc"].filter { $0.lowercased().contains(text) }
+    }
+
 }

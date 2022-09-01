@@ -25,10 +25,17 @@ class WalkThroughViewController: BaseViewController {
     }
     
     
+    // MARK: - Selectors
+    
+    @objc func confirmButtonTapped() {
+        dismiss(animated: true)
+    }
+    
+    
     // MARK: - Helper Functions
     
     override func configureUI() {
-
+        walkThroughView.confirmButton.addTarget(self, action: #selector(confirmButtonTapped), for: .touchUpInside)
     }
 
 }

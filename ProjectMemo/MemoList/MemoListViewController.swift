@@ -7,6 +7,8 @@
 
 import UIKit
 
+import RealmSwift
+
 final class MemoListViewController: BaseViewController {
 
     // MARK: - Properties
@@ -14,6 +16,13 @@ final class MemoListViewController: BaseViewController {
     private let memoListView = MemoListView()
     private let searchController = SearchViewController(searchResultsController: nil)
     private var searchResults:[String] = []
+    let repository = MemoRepository()
+    var tasks: Results<Memo>! {
+        didSet {
+            memoListView.tableView.reloadData()
+        }
+    }
+    
     
     // MARK: - Init
     
@@ -39,8 +48,9 @@ final class MemoListViewController: BaseViewController {
     override func configureUI() {
         configureNavi()
         configureTableView()
-        showWalkThrough()
         configureToolBars()
+        fetchMemo()
+        countPinnedItems()
     }
     
     private func configureNavi() {
@@ -74,6 +84,14 @@ final class MemoListViewController: BaseViewController {
 
         setToolbarItems(arr as? [UIBarButtonItem] ?? [UIBarButtonItem](), animated: true)
     }
+    
+    func fetchMemo() {
+        tasks = repository.fetchMemo()
+    }
+    
+    func countPinnedItems() {
+        tasks.forEach { if $0.pinned { repository.PinnedItemCount += 1 } }
+    }
 
 }
 
@@ -88,10 +106,17 @@ extension MemoListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let label: UILabel = UILabel()
-        label.text = section == 0 ? "고정된 메모" : "메모"
-        label.textColor = .orange
-        label.font = .boldSystemFont(ofSize: 24)
-        return label
+        switch repository.PinnedItemCount {
+        case 0:
+            label.text = "메모"
+            label.font = .boldSystemFont(ofSize: 24)
+            return label
+        case let x where x > 0 && x < 6:
+            label.text = section == 0 ? "고정된 메모" : "메모"
+            label.font = .boldSystemFont(ofSize: 24)
+            return label
+        default: return nil
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -103,10 +128,13 @@ extension MemoListViewController: UITableViewDelegate {
         
         let pinned = UIContextualAction(style: .normal, title: "") { action, view, completionHandler in
             
-            // Realm Data Update
-//            self.repository.updateFavourite(item: self.tasks[indexPath.row])
-//            self.fetchRealm()
-            
+            if self.repository.PinnedItemCount > 5 {
+                self.showAlertMessageWithOnlyConfirm(title: "더 이상 메모를 고정할 수 없습니다! 기존 메모를 삭제 후 고정해주세요.")
+            } else {
+                self.repository.updateStateOfPin(item: self.tasks[indexPath.row])
+                self.repository.PinnedItemCount += self.tasks[indexPath.row].pinned ? 1 : -1
+                self.fetchMemo()
+            }
         }
         
         let image = indexPath.row % 2 == 0 ? "pin.slash.fill" : "pin.fill"
@@ -121,9 +149,9 @@ extension MemoListViewController: UITableViewDelegate {
         
         let delete = UIContextualAction(style: .normal, title: "") { action, view, completionHandler in
             
-            // Realm Data Update
-//            self.repository.updateFavourite(item: self.tasks[indexPath.row])
-//            self.fetchRealm()
+            self.repository.deleteItem(item: self.tasks[indexPath.row])
+            self.repository.PinnedItemCount += self.tasks[indexPath.row].pinned ? 0 : -1
+            self.fetchMemo()
             
         }
         
@@ -142,15 +170,28 @@ extension MemoListViewController: UITableViewDelegate {
 extension MemoListViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        switch repository.PinnedItemCount {
+        case let x where x > 0 && x < 6: return 2
+        default: return 1
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? 5 : 50
+        switch repository.PinnedItemCount {
+        case let x where x > 0 && x < 6:
+            if section == 0 {
+                return x
+            } else {
+                return tasks.count - x
+            }
+        default: return tasks.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MemoListTableViewCell.reuseIdentifier, for: indexPath) as? MemoListTableViewCell else { return UITableViewCell() }
+        
+        cell.setComponents(item: tasks[indexPath.row])
         
         return cell
     }

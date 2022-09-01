@@ -7,12 +7,18 @@
 
 import UIKit
 
+import RealmSwift
+
 final class EditingViewController: BaseViewController {
 
     // MARK: - Properties
     
     private let editingView = EditingView()
     var list:[String.SubSequence] = []
+    let repository = MemoRepository()
+    
+    var tasks: Results<Memo>!
+    
     
     // MARK: - Init
     
@@ -64,7 +70,6 @@ final class EditingViewController: BaseViewController {
     
     private func configureNavi() {
         showNaviBars(naviTitle: " ", naviBarTintColor: .orange)
-//        navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.prompt = " "
         

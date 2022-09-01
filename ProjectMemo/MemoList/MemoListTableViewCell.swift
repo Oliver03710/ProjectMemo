@@ -17,7 +17,6 @@ class MemoListTableViewCell: BaseTableViewCell {
         let label = UILabel()
         label.font = .boldSystemFont(ofSize: 16)
         label.numberOfLines = 1
-        label.text = "Title Label"
         return label
     }()
     
@@ -26,7 +25,6 @@ class MemoListTableViewCell: BaseTableViewCell {
         label.font = .systemFont(ofSize: 12)
         label.textColor = .darkGray
         label.numberOfLines = 1
-        label.text = "9999 99 99 일요일 99:99"
         return label
     }()
     
@@ -35,7 +33,6 @@ class MemoListTableViewCell: BaseTableViewCell {
         label.font = .systemFont(ofSize: 12)
         label.textColor = .darkGray
         label.numberOfLines = 1
-        label.text = "Additional Label"
         return label
     }()
     
@@ -88,6 +85,12 @@ class MemoListTableViewCell: BaseTableViewCell {
             make.width.equalTo(200)
         }
         
+    }
+    
+    func setComponents(item: Memo) {
+        titleLabel.text = item.titleMemo
+        mainTextlLabel.text = item.mainMemo
+        dateLabel.text = item.dateRegistered.setDateFormat()
     }
     
 }

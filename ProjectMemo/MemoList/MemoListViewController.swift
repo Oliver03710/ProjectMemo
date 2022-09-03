@@ -15,13 +15,17 @@ final class MemoListViewController: BaseViewController {
     
     private let memoListView = MemoListView()
     private let searchController = SearchViewController(searchResultsController: nil)
-    private var searchResults:[String] = []
+    private var searchResults: [String] = []
+    
     let repository = MemoRepository()
+    let subRepository = SubMemoRepository()
+    
     var tasks: Results<Memo>! {
         didSet {
             memoListView.tableView.reloadData()
         }
     }
+    var subTasks: Results<SubMemo>!
     
     
     // MARK: - Init
@@ -31,7 +35,13 @@ final class MemoListViewController: BaseViewController {
     }
     
     override func viewDidLoad() {
+        fetchMemo()
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchMemo()
     }
     
     
@@ -46,16 +56,17 @@ final class MemoListViewController: BaseViewController {
     // MARK: - Helper Functions
     
     override func configureUI() {
+        fetchMemo()
+        showWalkThrough()
         configureNavi()
         configureTableView()
         configureToolBars()
-        fetchMemo()
-        countPinnedItems()
+        print("Realm is located at:", repository.localRealm.configuration.fileURL!)
     }
     
     private func configureNavi() {
         
-        showNaviBars(naviTitle: "메모", naviBarTintColor: .orange)
+        showNaviBars(naviTitle: "\(0000)개의 메모", naviBarTintColor: .orange)
         navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.prefersLargeTitles = true
         
@@ -69,6 +80,7 @@ final class MemoListViewController: BaseViewController {
     }
     
     func showWalkThrough() {
+        guard subTasks.isEmpty else { return }
         let vc = WalkThroughViewController()
         transitionViewController(vc, transitionStyle: .presentOverFullScreen)
     }
@@ -87,10 +99,11 @@ final class MemoListViewController: BaseViewController {
     
     func fetchMemo() {
         tasks = repository.fetchMemo()
-    }
-    
-    func countPinnedItems() {
-        tasks.forEach { if $0.pinned { repository.PinnedItemCount += 1 } }
+        subTasks = subRepository.fetchMemo()
+        if !tasks.where({ $0.pinned == true }).isEmpty {
+            MemoStatus.pinned = tasks.where({ $0.pinned == true })
+        }
+        MemoStatus.unPinned = tasks.where({ $0.pinned == false })
     }
 
 }
@@ -106,14 +119,18 @@ extension MemoListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let label: UILabel = UILabel()
-        switch repository.PinnedItemCount {
+        switch subTasks[0].pinnedMemos {
         case 0:
             label.text = "메모"
             label.font = .boldSystemFont(ofSize: 24)
             return label
         case let x where x > 0 && x < 6:
-            label.text = section == 0 ? "고정된 메모" : "메모"
             label.font = .boldSystemFont(ofSize: 24)
+            if MemoStatus.unPinned.isEmpty {
+                label.text = section == 0 ? "고정된 메모" : ""
+            } else {
+                label.text = section == 0 ? "고정된 메모" : "메모"
+            }
             return label
         default: return nil
         }
@@ -126,31 +143,78 @@ extension MemoListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
+        let index = indexPath
         let pinned = UIContextualAction(style: .normal, title: "") { action, view, completionHandler in
             
-            if self.repository.PinnedItemCount > 5 {
-                self.showAlertMessageWithOnlyConfirm(title: "더 이상 메모를 고정할 수 없습니다! 기존 메모를 삭제 후 고정해주세요.")
-            } else {
-                self.repository.updateStateOfPin(item: self.tasks[indexPath.row])
-                self.repository.PinnedItemCount += self.tasks[indexPath.row].pinned ? 1 : -1
-                self.fetchMemo()
+            switch index.section {
+            case 0:
+                if !self.tasks.where({ $0.pinned == true }).isEmpty {
+                    self.subRepository.pinnedCountIsDecreased(item: self.subTasks[0])
+                    self.repository.updateStateOfPin(item: MemoStatus.pinned[index.row])
+                } else {
+                    self.subRepository.pinnedCountIsIncreased(item: self.subTasks[0])
+                    self.repository.updateStateOfPin(item: MemoStatus.unPinned[index.row])
+                }
+            case 1:
+                if MemoStatus.pinned.count >= 5 {
+                    self.showAlertMessageWithOnlyConfirm(title: "더 이상 메모를 고정할 수 없습니다! 기존 메모를 삭제 후 고정해주세요.")
+                } else {
+                    self.subRepository.pinnedCountIsIncreased(item: self.subTasks[0])
+                    self.repository.updateStateOfPin(item: MemoStatus.unPinned[index.row])
+                }
+            default: break
             }
+            self.fetchMemo()
+            print(self.tasks[index.row].pinned, MemoStatus.pinned.count, MemoStatus.unPinned.count)
+            
         }
         
-        let image = indexPath.row % 2 == 0 ? "pin.slash.fill" : "pin.fill"
-        pinned.image = UIImage(systemName: image)
-        pinned.backgroundColor = .orange
-        
-        return UISwipeActionsConfiguration(actions: [pinned])
+        switch index.section {
+        case 0:
+            if !tasks.where({ $0.pinned == true }).isEmpty {
+                let image = MemoStatus.pinned[index.row].pinned ? "pin.slash.fill" : "pin.fill"
+                pinned.image = UIImage(systemName: image)
+            } else {
+                let image = MemoStatus.unPinned[index.row].pinned ? "pin.slash.fill" : "pin.fill"
+                pinned.image = UIImage(systemName: image)
+            }
+            pinned.backgroundColor = .orange
+            return UISwipeActionsConfiguration(actions: [pinned])
+        case 1:
+            if MemoStatus.pinned.count >= 5 {
+                pinned.image = UIImage(systemName: "pin.fill")
+            } else {
+                let image = MemoStatus.unPinned[index.row].pinned ? "pin.slash.fill" : "pin.fill"
+                pinned.image = UIImage(systemName: image)
+            }
+            pinned.backgroundColor = .orange
+            return UISwipeActionsConfiguration(actions: [pinned])
+        default:
+            let image = self.tasks[index.row].pinned ? "pin.slash.fill" : "pin.fill"
+            pinned.image = UIImage(systemName: image)
+            pinned.backgroundColor = .orange
+            return UISwipeActionsConfiguration(actions: [pinned])
+        }
         
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
+        let index = indexPath
         let delete = UIContextualAction(style: .normal, title: "") { action, view, completionHandler in
             
-            self.repository.deleteItem(item: self.tasks[indexPath.row])
-            self.repository.PinnedItemCount += self.tasks[indexPath.row].pinned ? 0 : -1
+            switch index.section {
+            case 0:
+                if !self.tasks.where({ $0.pinned == true }).isEmpty {
+                    self.subRepository.pinnedCountIsDecreased(item: self.subTasks[0])
+                    self.repository.deleteItem(item: MemoStatus.pinned[index.row])
+                } else {
+                    self.repository.deleteItem(item: MemoStatus.unPinned[index.row])
+                }
+            case 1:
+                self.repository.deleteItem(item: MemoStatus.unPinned[index.row])
+            default: break
+            }
             self.fetchMemo()
             
         }
@@ -170,14 +234,19 @@ extension MemoListViewController: UITableViewDelegate {
 extension MemoListViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        switch repository.PinnedItemCount {
-        case let x where x > 0 && x < 6: return 2
-        default: return 1
+        if tasks.isEmpty {
+            return 0
+        } else {
+            switch subTasks[0].pinnedMemos {
+            case let x where x > 0 && x < 6: return 2
+            default: return 1
+            }
         }
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch repository.PinnedItemCount {
+        switch subTasks[0].pinnedMemos {
         case let x where x > 0 && x < 6:
             if section == 0 {
                 return x
@@ -191,9 +260,20 @@ extension MemoListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MemoListTableViewCell.reuseIdentifier, for: indexPath) as? MemoListTableViewCell else { return UITableViewCell() }
         
-        cell.setComponents(item: tasks[indexPath.row])
+        switch indexPath.section {
+        case 0:
+            if !tasks.where({ $0.pinned == true }).isEmpty {
+                cell.setComponents(item: MemoStatus.pinned[indexPath.row])
+            } else {
+                cell.setComponents(item: MemoStatus.unPinned[indexPath.row])
+            }
+        case 1:
+            cell.setComponents(item: MemoStatus.unPinned[indexPath.row])
+        default: break
+        }
         
         return cell
+        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

@@ -14,10 +14,7 @@ final class EditingViewController: BaseViewController {
     // MARK: - Properties
     
     private let editingView = EditingView()
-    var list:[String.SubSequence] = []
     let repository = MemoRepository()
-    
-    var tasks: Results<Memo>!
     
     
     // MARK: - Init
@@ -34,12 +31,11 @@ final class EditingViewController: BaseViewController {
         super.viewWillDisappear(animated)
         
         if isMovingFromParent {
-            guard let text = editingView.textView.text else { return }
-            let lines = text.split(omittingEmptySubsequences: false, whereSeparator: \.isNewline)
-            list = lines
-            print(list)
-            let str = list.joined(separator: "\n")
-            print(str)
+            let title = splitText(editingView.textView.text).0
+            let mainText = splitText(editingView.textView.text).1
+            
+            let task = Memo(titleMemo: title, mainMemo: mainText, dateRegistered: Date())
+            repository.addItem(item: task, objectId: task.objectId)
         }
     }
     
@@ -51,14 +47,11 @@ final class EditingViewController: BaseViewController {
     }
     
     @objc func completionButtonTapped() {
-        guard let text = editingView.textView.text else { return }
-        let lines = text.split(omittingEmptySubsequences: false, whereSeparator: \.isNewline)
-        list = lines
-        guard let firstElement = list.first else { return }
-        print(firstElement)
-        print(list[0])
-        let str = list.joined(separator: "\n")
-        print(str)
+        let title = splitText(editingView.textView.text).0
+        let mainText = splitText(editingView.textView.text).1
+        
+        let task = Memo(titleMemo: title, mainMemo: mainText, dateRegistered: Date())
+        repository.addItem(item: task, objectId: task.objectId)
     }
     
     

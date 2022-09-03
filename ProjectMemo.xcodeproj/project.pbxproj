@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AD0DF7A228C1D261003F648C /* SplitText+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0DF7A128C1D261003F648C /* SplitText+Extension.swift */; };
+		AD0DF7A428C1E6B5003F648C /* SecondRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0DF7A328C1E6B5003F648C /* SecondRealm.swift */; };
+		AD0DF7A628C1E74B003F648C /* SubMemoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0DF7A528C1E74B003F648C /* SubMemoRepository.swift */; };
 		AD6CCA6828BF2C2700C6C5A8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6CCA6728BF2C2700C6C5A8 /* AppDelegate.swift */; };
 		AD6CCA6A28BF2C2700C6C5A8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6CCA6928BF2C2700C6C5A8 /* SceneDelegate.swift */; };
 		AD6CCA6F28BF2C2700C6C5A8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD6CCA6D28BF2C2700C6C5A8 /* Main.storyboard */; };
@@ -27,6 +30,7 @@
 		AD78E23328BF4DF30028AF65 /* UINavigationBar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD78E23228BF4DF30028AF65 /* UINavigationBar+Extension.swift */; };
 		AD7F7A4428BFC6BD00E299BA /* Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7F7A4328BFC6BD00E299BA /* Realm.swift */; };
 		AD7F7A4628BFC6C500E299BA /* MemoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7F7A4528BFC6C500E299BA /* MemoRepository.swift */; };
+		AD849C5828C32DFE00115CEA /* StatusOfMemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD849C5728C32DFE00115CEA /* StatusOfMemo.swift */; };
 		ADF044D228BF5377006D69E8 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = ADF044D128BF5377006D69E8 /* SnapKit */; };
 		ADF044D528BF53AB006D69E8 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = ADF044D428BF53AB006D69E8 /* Realm */; };
 		ADF044D728BF53AB006D69E8 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = ADF044D628BF53AB006D69E8 /* RealmSwift */; };
@@ -39,6 +43,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AD0DF7A128C1D261003F648C /* SplitText+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SplitText+Extension.swift"; sourceTree = "<group>"; };
+		AD0DF7A328C1E6B5003F648C /* SecondRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondRealm.swift; sourceTree = "<group>"; };
+		AD0DF7A528C1E74B003F648C /* SubMemoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubMemoRepository.swift; sourceTree = "<group>"; };
 		AD6CCA6428BF2C2700C6C5A8 /* ProjectMemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProjectMemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD6CCA6728BF2C2700C6C5A8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AD6CCA6928BF2C2700C6C5A8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -60,6 +67,7 @@
 		AD78E23228BF4DF30028AF65 /* UINavigationBar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationBar+Extension.swift"; sourceTree = "<group>"; };
 		AD7F7A4328BFC6BD00E299BA /* Realm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Realm.swift; sourceTree = "<group>"; };
 		AD7F7A4528BFC6C500E299BA /* MemoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoRepository.swift; sourceTree = "<group>"; };
+		AD849C5728C32DFE00115CEA /* StatusOfMemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusOfMemo.swift; sourceTree = "<group>"; };
 		ADF044DE28BF544C006D69E8 /* MemoListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoListTableViewCell.swift; sourceTree = "<group>"; };
 		ADF044E028BF5471006D69E8 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		ADF044E228BF83A6006D69E8 /* WalkThroughViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkThroughViewController.swift; sourceTree = "<group>"; };
@@ -104,6 +112,7 @@
 			children = (
 				AD6CCA6728BF2C2700C6C5A8 /* AppDelegate.swift */,
 				AD6CCA6928BF2C2700C6C5A8 /* SceneDelegate.swift */,
+				AD849C5428C32C7B00115CEA /* Data */,
 				AD7F7A4228BFC6B100E299BA /* Realm */,
 				AD6CCA9A28BF42CD00C6C5A8 /* Extensions */,
 				AD6CCA9728BF426E00C6C5A8 /* Protocols */,
@@ -189,6 +198,7 @@
 				AD6CCA9D28BF433F00C6C5A8 /* UIAlertViewController+Extension.swift */,
 				AD78E23228BF4DF30028AF65 /* UINavigationBar+Extension.swift */,
 				ADF9015428C0FD4B006A987D /* Date+Extension.swift */,
+				AD0DF7A128C1D261003F648C /* SplitText+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -197,9 +207,19 @@
 			isa = PBXGroup;
 			children = (
 				AD7F7A4328BFC6BD00E299BA /* Realm.swift */,
+				AD0DF7A328C1E6B5003F648C /* SecondRealm.swift */,
 				AD7F7A4528BFC6C500E299BA /* MemoRepository.swift */,
+				AD0DF7A528C1E74B003F648C /* SubMemoRepository.swift */,
 			);
 			name = Realm;
+			sourceTree = "<group>";
+		};
+		AD849C5428C32C7B00115CEA /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				AD849C5728C32DFE00115CEA /* StatusOfMemo.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -289,14 +309,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				ADF044E128BF5471006D69E8 /* BaseTableViewCell.swift in Sources */,
+				AD0DF7A228C1D261003F648C /* SplitText+Extension.swift in Sources */,
 				AD6CCA8128BF30FF00C6C5A8 /* BaseViewController.swift in Sources */,
 				AD6CCA9428BF411200C6C5A8 /* EditingViewController.swift in Sources */,
+				AD849C5828C32DFE00115CEA /* StatusOfMemo.swift in Sources */,
 				AD6CCA8928BF3F7000C6C5A8 /* MemoListViewController.swift in Sources */,
 				AD6CCA9E28BF433F00C6C5A8 /* UIAlertViewController+Extension.swift in Sources */,
 				ADF9015528C0FD4B006A987D /* Date+Extension.swift in Sources */,
 				AD6CCA9128BF40D400C6C5A8 /* SearchViewController.swift in Sources */,
 				AD78E23328BF4DF30028AF65 /* UINavigationBar+Extension.swift in Sources */,
 				AD6CCA8E28BF400600C6C5A8 /* WalkThroughView.swift in Sources */,
+				AD0DF7A628C1E74B003F648C /* SubMemoRepository.swift in Sources */,
 				AD6CCA9628BF413200C6C5A8 /* EditingView.swift in Sources */,
 				AD6CCA8B28BF3F9800C6C5A8 /* MemoListView.swift in Sources */,
 				ADF044E328BF83A6006D69E8 /* WalkThroughViewController.swift in Sources */,
@@ -304,6 +327,7 @@
 				ADF044DF28BF544C006D69E8 /* MemoListTableViewCell.swift in Sources */,
 				AD6CCA9C28BF42E700C6C5A8 /* Transitions+Extension.swift in Sources */,
 				AD6CCA9928BF428B00C6C5A8 /* Reusable+Protocol.swift in Sources */,
+				AD0DF7A428C1E6B5003F648C /* SecondRealm.swift in Sources */,
 				AD7F7A4628BFC6C500E299BA /* MemoRepository.swift in Sources */,
 				AD6CCA6828BF2C2700C6C5A8 /* AppDelegate.swift in Sources */,
 				AD6CCA6A28BF2C2700C6C5A8 /* SceneDelegate.swift in Sources */,

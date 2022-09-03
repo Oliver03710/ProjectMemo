@@ -7,11 +7,16 @@
 
 import UIKit
 
+import RealmSwift
+
 class WalkThroughViewController: BaseViewController {
 
     // MARK: - Properties
     
     private let walkThroughView = WalkThroughView()
+    
+    let subRepository = SubMemoRepository()
+    var subTasks: Results<SubMemo>!
     
     
     // MARK: - Init
@@ -28,6 +33,8 @@ class WalkThroughViewController: BaseViewController {
     // MARK: - Selectors
     
     @objc func confirmButtonTapped() {
+        let task = SubMemo(executed: true)
+        subRepository.addItem(item: task)
         dismiss(animated: true)
     }
     

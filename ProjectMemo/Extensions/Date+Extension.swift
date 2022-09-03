@@ -22,7 +22,7 @@ extension Date {
     }
     
     func setDateFormat() -> String {
-        let timeInterval = self.timeIntervalSinceNow
+        let timeInterval = Date().timeIntervalSince(self)
         
         switch timeInterval {
         case let x where x >= 0 && x < 86400: return toString()

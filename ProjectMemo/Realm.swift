@@ -14,7 +14,6 @@ class Memo: Object {
     @Persisted var mainMemo: String?
     @Persisted var dateRegistered = Date()
     @Persisted var pinned: Bool
-    @Persisted var executed: Bool
     
     @Persisted(primaryKey: true) var objectId: ObjectId
     
@@ -24,7 +23,6 @@ class Memo: Object {
         self.mainMemo = mainMemo
         self.dateRegistered = dateRegistered
         self.pinned = false
-        self.executed = false
     }
     
 }

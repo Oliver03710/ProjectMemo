@@ -34,7 +34,7 @@ class MemoListView: BaseView {
     // MARK: - Helper Functions
     
     override func configureUI() {
-        self.backgroundColor = .orange
+        self.backgroundColor = .systemBackground
         [tableView].forEach { self.addSubview($0) }
     }
     

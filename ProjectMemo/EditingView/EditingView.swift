@@ -33,7 +33,7 @@ class EditingView: BaseView {
     // MARK: - Helper Functions
     
     override func configureUI() {
-        self.backgroundColor = .orange
+        self.backgroundColor = .systemBackground
         textView.becomeFirstResponder()
         [textView].forEach { self.addSubview($0) }
     }

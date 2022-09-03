@@ -19,7 +19,6 @@ protocol MemoRepositoryType {
 class MemoRepository: MemoRepositoryType {
 
     let localRealm = try! Realm()
-    var PinnedItemCount = 0
     
     func addItem(item: Memo, objectId: ObjectId) {
         
@@ -34,7 +33,7 @@ class MemoRepository: MemoRepositoryType {
     }
     
     func updateStateOfPin(item: Memo) {
-
+        
         do {
             try localRealm.write {
                 item.pinned.toggle()

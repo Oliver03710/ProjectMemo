@@ -117,6 +117,8 @@ final class MemoListViewController: BaseViewController {
             MemoStatus.pinned = tasks.where({ $0.pinned == true })
         }
         MemoStatus.unPinned = tasks.where({ $0.pinned == false })
+        guard let numbers = numberFormatter.string(for: tasks.count) else { return }
+        navigationItem.title = "\(numbers)개의 메모"
     }
     
     func configureSearchBars() {
@@ -348,12 +350,12 @@ extension MemoListViewController: UITableViewDataSource {
             switch indexPath.section {
             case 0:
                 if !MemoStatus.searchResults.where({ $0.pinned == true }).isEmpty {
-                    isFiltering ? cell.isFilteringSetComponents(item: MemoStatus.searchResults.where({ $0.pinned == true })[indexPath.row], textSearched: self.textSearched) : cell.setComponents(item: MemoStatus.searchResults.where({ $0.pinned == true })[indexPath.row])
+                    cell.isFilteringSetComponents(item: MemoStatus.searchResults.where({ $0.pinned == true })[indexPath.row], textSearched: self.textSearched)
                 } else {
-                    isFiltering ? cell.isFilteringSetComponents(item: MemoStatus.searchResults.where({ $0.pinned == false })[indexPath.row], textSearched: self.textSearched) : cell.setComponents(item: MemoStatus.searchResults.where({ $0.pinned == false })[indexPath.row])
+                    cell.isFilteringSetComponents(item: MemoStatus.searchResults.where({ $0.pinned == false })[indexPath.row], textSearched: self.textSearched)
                 }
             case 1:
-                isFiltering ? cell.isFilteringSetComponents(item: MemoStatus.searchResults.where({ $0.pinned == false })[indexPath.row], textSearched: self.textSearched) : cell.setComponents(item: MemoStatus.searchResults.where({ $0.pinned == false })[indexPath.row])
+                cell.isFilteringSetComponents(item: MemoStatus.searchResults.where({ $0.pinned == false })[indexPath.row], textSearched: self.textSearched)
             default: break
             }
             

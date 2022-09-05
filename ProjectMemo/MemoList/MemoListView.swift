@@ -16,6 +16,7 @@ class MemoListView: BaseView {
     lazy var tableView: UITableView = {
         let tv = UITableView(frame: .zero, style: .insetGrouped)
         tv.register(MemoListTableViewCell.self, forCellReuseIdentifier: MemoListTableViewCell.reuseIdentifier)
+        tv.keyboardDismissMode = .onDrag
         return tv
     }()
     

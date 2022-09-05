@@ -14,8 +14,6 @@ final class MemoListViewController: BaseViewController {
     // MARK: - Properties
     
     private let memoListView = MemoListView()
-    private let searchController = SearchViewController(searchResultsController: nil)
-    private var searchResults: [String] = []
     
     let repository = MemoRepository()
     let subRepository = SubMemoRepository()
@@ -26,6 +24,22 @@ final class MemoListViewController: BaseViewController {
         }
     }
     var subTasks: Results<SubMemo>!
+    
+    var isFiltering: Bool {
+        let searchController = self.navigationItem.searchController
+        let isActive = searchController?.isActive ?? false
+        let isSearchBarHasText = searchController?.searchBar.text?.isEmpty == false
+        return isActive && isSearchBarHasText
+    }
+    
+    var textSearched = ""
+    var textViewText = ""
+    var searchBarIsActive = false
+    let numberFormatter: NumberFormatter = {
+        let nf = NumberFormatter()
+        nf.numberStyle = .decimal
+        return nf
+    }()
     
     
     // MARK: - Init
@@ -49,6 +63,8 @@ final class MemoListViewController: BaseViewController {
     
     @objc func createNewMemo() {
         let vc = EditingViewController()
+        vc.backButtonTitle = navigationItem.title!
+        vc.editingView.textView.becomeFirstResponder()
         transitionViewController(vc, transitionStyle: .push)
     }
     
@@ -56,22 +72,19 @@ final class MemoListViewController: BaseViewController {
     // MARK: - Helper Functions
     
     override func configureUI() {
-        fetchMemo()
         showWalkThrough()
         configureNavi()
         configureTableView()
         configureToolBars()
+        configureSearchBars()
         print("Realm is located at:", repository.localRealm.configuration.fileURL!)
     }
     
     private func configureNavi() {
-        
-        showNaviBars(naviTitle: "\(0000)개의 메모", naviBarTintColor: .orange)
+        guard let numbers = numberFormatter.string(for: tasks.count) else { return }
+        showNaviBars(naviTitle: "\(numbers)개의 메모", naviBarTintColor: .orange)
         navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.prefersLargeTitles = true
-        
-        self.navigationItem.searchController = searchController
-        self.navigationItem.hidesSearchBarWhenScrolling = false
     }
     
     private func configureTableView() {
@@ -90,9 +103,9 @@ final class MemoListViewController: BaseViewController {
         navigationController?.toolbar.tintColor = .orange
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: self, action: nil)
 
-        let loveButton = UIBarButtonItem(image: UIImage(systemName: "square.and.pencil"), style: .plain, target: self, action: #selector(createNewMemo))
+        let createMemoButton = UIBarButtonItem(image: UIImage(systemName: "square.and.pencil"), style: .plain, target: self, action: #selector(createNewMemo))
 
-        let arr: [Any] = [flexibleSpace, loveButton]
+        let arr: [Any] = [flexibleSpace, createMemoButton]
 
         setToolbarItems(arr as? [UIBarButtonItem] ?? [UIBarButtonItem](), animated: true)
     }
@@ -104,6 +117,20 @@ final class MemoListViewController: BaseViewController {
             MemoStatus.pinned = tasks.where({ $0.pinned == true })
         }
         MemoStatus.unPinned = tasks.where({ $0.pinned == false })
+    }
+    
+    func configureSearchBars() {
+        
+        let searchController = UISearchController(searchResultsController: nil)
+        
+        let placeholder = "검색창입니다"
+        searchController.searchBar.placeholder = placeholder
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.searchBar.setValue("취소", forKey: "cancelButtonText")
+        
+        self.navigationItem.searchController = searchController
+        self.navigationItem.hidesSearchBarWhenScrolling = false
+        searchController.searchResultsUpdater = self
     }
 
 }
@@ -119,25 +146,72 @@ extension MemoListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let label: UILabel = UILabel()
-        switch subTasks[0].pinnedMemos {
-        case 0:
-            label.text = "메모"
-            label.font = .boldSystemFont(ofSize: 24)
-            return label
-        case let x where x > 0 && x < 6:
-            label.font = .boldSystemFont(ofSize: 24)
-            if MemoStatus.unPinned.isEmpty {
-                label.text = section == 0 ? "고정된 메모" : ""
-            } else {
-                label.text = section == 0 ? "고정된 메모" : "메모"
+        label.font = .boldSystemFont(ofSize: 24)
+        
+        if isFiltering {
+            switch MemoStatus.searchResults.where({ $0.pinned == true }).count {
+            case 0: label.text = MemoStatus.searchResults.isEmpty ? "" : "메모"
+            case let x where x > 0 && x < 6:
+                if MemoStatus.searchResults.where({ $0.pinned == false }).isEmpty {
+                    label.text = section == 0 ? "고정된 메모" : ""
+                } else {
+                    label.text = section == 0 ? "고정된 메모" : "메모"
+                }
+            default: break
             }
-            return label
-        default: return nil
+        } else {
+            switch subTasks[0].pinnedMemos {
+            case 0: label.text = "메모"
+            case let x where x > 0 && x < 6:
+                if MemoStatus.unPinned.isEmpty {
+                    label.text = section == 0 ? "고정된 메모" : ""
+                } else {
+                    label.text = section == 0 ? "고정된 메모" : "메모"
+                }
+            default: break
+            }
         }
+        
+        return label
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = EditingViewController()
+        let index = indexPath
+        if isFiltering {
+            switch index.section {
+            case 0:
+                if !MemoStatus.searchResults.where({ $0.pinned == true }).isEmpty {
+                    vc.editingView.textView.text = [MemoStatus.searchResults.where({ $0.pinned == true })[index.row].titleMemo, MemoStatus.searchResults.where({ $0.pinned == true })[index.row].mainMemo ?? ""].joined(separator: "\n")
+                    vc.objectId = MemoStatus.searchResults.where({ $0.pinned == true })[index.row].objectId
+                } else {
+                    vc.editingView.textView.text = [MemoStatus.searchResults.where({ $0.pinned == false })[index.row].titleMemo, MemoStatus.searchResults.where({ $0.pinned == false })[index.row].mainMemo ?? ""].joined(separator: "\n")
+                    vc.objectId = MemoStatus.searchResults.where({ $0.pinned == false })[index.row].objectId
+                }
+            case 1:
+                vc.editingView.textView.text = [MemoStatus.searchResults.where({ $0.pinned == false })[index.row].titleMemo, MemoStatus.searchResults.where({ $0.pinned == false })[index.row].mainMemo ?? ""].joined(separator: "\n")
+                vc.objectId = MemoStatus.searchResults.where({ $0.pinned == false })[index.row].objectId
+            default: break
+            }
+        } else {
+            switch index.section {
+            case 0:
+                if !tasks.where({ $0.pinned == true }).isEmpty {
+                    vc.editingView.textView.text = [MemoStatus.pinned[index.row].titleMemo, MemoStatus.pinned[index.row].mainMemo ?? ""].joined(separator: "\n")
+                    vc.objectId = MemoStatus.pinned[index.row].objectId
+                } else {
+                    vc.editingView.textView.text = [MemoStatus.unPinned[index.row].titleMemo, MemoStatus.unPinned[index.row].mainMemo ?? ""].joined(separator: "\n")
+                    vc.objectId = MemoStatus.unPinned[index.row].objectId
+                }
+            case 1:
+                vc.editingView.textView.text = [MemoStatus.unPinned[index.row].titleMemo, MemoStatus.unPinned[index.row].mainMemo ?? ""].joined(separator: "\n")
+                vc.objectId = MemoStatus.unPinned[index.row].objectId
+            default: break
+            }
+        }
+        vc.tasks = tasks
+        vc.indexPath = index
+        vc.backButtonTitle = searchBarIsActive ? navigationItem.title! : "메모"
         transitionViewController(vc, transitionStyle: .push)
     }
     
@@ -203,19 +277,21 @@ extension MemoListViewController: UITableViewDelegate {
         let index = indexPath
         let delete = UIContextualAction(style: .normal, title: "") { action, view, completionHandler in
             
-            switch index.section {
-            case 0:
-                if !self.tasks.where({ $0.pinned == true }).isEmpty {
-                    self.subRepository.pinnedCountIsDecreased(item: self.subTasks[0])
-                    self.repository.deleteItem(item: MemoStatus.pinned[index.row])
-                } else {
+            self.showAlertMessage(title: "정말 삭제하시겠습니까?") {
+                switch index.section {
+                case 0:
+                    if !self.tasks.where({ $0.pinned == true }).isEmpty {
+                        self.subRepository.pinnedCountIsDecreased(item: self.subTasks[0])
+                        self.repository.deleteItem(item: MemoStatus.pinned[index.row])
+                    } else {
+                        self.repository.deleteItem(item: MemoStatus.unPinned[index.row])
+                    }
+                case 1:
                     self.repository.deleteItem(item: MemoStatus.unPinned[index.row])
+                default: break
                 }
-            case 1:
-                self.repository.deleteItem(item: MemoStatus.unPinned[index.row])
-            default: break
+                self.fetchMemo()
             }
-            self.fetchMemo()
             
         }
         
@@ -234,45 +310,71 @@ extension MemoListViewController: UITableViewDelegate {
 extension MemoListViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        if tasks.isEmpty {
-            return 0
-        } else {
-            switch subTasks[0].pinnedMemos {
+        if isFiltering {
+            switch MemoStatus.searchResults.where({ $0.pinned == true }).count {
             case let x where x > 0 && x < 6: return 2
             default: return 1
             }
+        } else {
+            if tasks.isEmpty {
+                return 0
+            } else {
+                switch subTasks[0].pinnedMemos {
+                case let x where x > 0 && x < 6: return 2
+                default: return 1
+                }
+            }
         }
-        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch subTasks[0].pinnedMemos {
-        case let x where x > 0 && x < 6:
-            if section == 0 {
-                return x
-            } else {
-                return tasks.count - x
+        if isFiltering {
+            switch MemoStatus.searchResults.where({ $0.pinned == true }).count {
+            case let x where x > 0 && x < 6: return section == 0 ? x : MemoStatus.searchResults.count - x
+            default: return MemoStatus.searchResults.count
             }
-        default: return tasks.count
+        } else {
+            switch subTasks[0].pinnedMemos {
+            case let x where x > 0 && x < 6: return section == 0 ? x : tasks.count - x
+            default: return tasks.count
+            }
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MemoListTableViewCell.reuseIdentifier, for: indexPath) as? MemoListTableViewCell else { return UITableViewCell() }
         
-        switch indexPath.section {
-        case 0:
-            if !tasks.where({ $0.pinned == true }).isEmpty {
-                cell.setComponents(item: MemoStatus.pinned[indexPath.row])
-            } else {
-                cell.setComponents(item: MemoStatus.unPinned[indexPath.row])
+        if isFiltering {
+            switch indexPath.section {
+            case 0:
+                if !MemoStatus.searchResults.where({ $0.pinned == true }).isEmpty {
+                    isFiltering ? cell.isFilteringSetComponents(item: MemoStatus.searchResults.where({ $0.pinned == true })[indexPath.row], textSearched: self.textSearched) : cell.setComponents(item: MemoStatus.searchResults.where({ $0.pinned == true })[indexPath.row])
+                } else {
+                    isFiltering ? cell.isFilteringSetComponents(item: MemoStatus.searchResults.where({ $0.pinned == false })[indexPath.row], textSearched: self.textSearched) : cell.setComponents(item: MemoStatus.searchResults.where({ $0.pinned == false })[indexPath.row])
+                }
+            case 1:
+                isFiltering ? cell.isFilteringSetComponents(item: MemoStatus.searchResults.where({ $0.pinned == false })[indexPath.row], textSearched: self.textSearched) : cell.setComponents(item: MemoStatus.searchResults.where({ $0.pinned == false })[indexPath.row])
+            default: break
             }
-        case 1:
-            cell.setComponents(item: MemoStatus.unPinned[indexPath.row])
-        default: break
+            
+            return cell
+            
+        } else {
+            
+            switch indexPath.section {
+            case 0:
+                if !tasks.where({ $0.pinned == true }).isEmpty {
+                    cell.setComponents(item: MemoStatus.pinned[indexPath.row])
+                } else {
+                    cell.setComponents(item: MemoStatus.unPinned[indexPath.row])
+                }
+            case 1:
+                cell.setComponents(item: MemoStatus.unPinned[indexPath.row])
+            default: break
+            }
+            
+            return cell
         }
-        
-        return cell
         
     }
     
@@ -290,7 +392,14 @@ extension MemoListViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         
         guard let text = searchController.searchBar.text else { return }
-        searchResults = ["label", "ab", "bc"].filter { $0.lowercased().contains(text) }
+            MemoStatus.searchResults = tasks.where { $0.titleMemo.contains(text, options: .caseInsensitive) || $0.mainMemo.contains(text, options: .caseInsensitive) }
+        
+        textSearched = text
+        guard let numbers = numberFormatter.string(for: tasks.count) else { return }
+        self.navigationItem.title = searchController.isActive ? "검색" : "\(numbers)개의 메모"
+        searchBarIsActive = searchController.isActive
+        self.memoListView.tableView.reloadData()
+        
     }
 
 }

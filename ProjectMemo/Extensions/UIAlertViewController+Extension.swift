@@ -9,9 +9,9 @@ import UIKit
 
 extension UIViewController {
     
-    func showAlertMessage(title: String, button: String = "확인") {
+    func showAlertMessage(title: String, button: String = "확인", completionHandler: @escaping () -> Void) {
         let okay = UIAlertAction(title: button, style: .default) { _ in
-            
+            completionHandler()
         }
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)

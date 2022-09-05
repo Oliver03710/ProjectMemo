@@ -8,7 +8,7 @@
 import UIKit
 
 extension UIViewController {
-    func splitText(_ text: String?) -> (String, String) {
+    func splitText(_ text: String?) -> (String, String?) {
         
         guard let text = text else { return ("", "")}
         
@@ -16,9 +16,11 @@ extension UIViewController {
        
         let firstElement = String(lines.removeFirst())
         
-        let restElements = lines.joined(separator: "\n")
-        
-        return (firstElement, restElements)
-        
+        if !lines.isEmpty {
+            let restElements = lines.joined(separator: "\n")
+            return (firstElement, restElements)
+        } else {
+            return (firstElement, nil)
+        }
     }
 }

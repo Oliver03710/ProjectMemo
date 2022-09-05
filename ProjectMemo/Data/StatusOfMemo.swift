@@ -12,4 +12,5 @@ import RealmSwift
 struct MemoStatus {
     static var pinned: Results<Memo>!
     static var unPinned: Results<Memo>!
+    static var searchResults: Results<Memo>!
 }

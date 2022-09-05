@@ -13,7 +13,7 @@ class EditingView: BaseView {
 
     // MARK: - Properties
     
-    let textView: UITextView = {
+    lazy var textView: UITextView = {
         let tv = UITextView()
         return tv
     }()
@@ -34,7 +34,6 @@ class EditingView: BaseView {
     
     override func configureUI() {
         self.backgroundColor = .systemBackground
-        textView.becomeFirstResponder()
         [textView].forEach { self.addSubview($0) }
     }
     

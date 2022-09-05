@@ -13,6 +13,7 @@ protocol MemoRepositoryType {
     func addItem(item: Memo, objectId: ObjectId)
     func fetchMemo() -> Results<Memo>
     func updateStateOfPin(item: Memo)
+    func updateMemo(item: Memo, title: String, mainText: String?)
     func deleteItem(item: Memo)
 }
 
@@ -37,6 +38,18 @@ class MemoRepository: MemoRepositoryType {
         do {
             try localRealm.write {
                 item.pinned.toggle()
+            }
+        } catch let error { print(error) }
+
+    }
+    
+    func updateMemo(item: Memo, title: String, mainText: String?) {
+        
+        do {
+            try localRealm.write {
+                item.titleMemo = title
+                item.mainMemo = mainText
+                item.dateRegistered = Date()
             }
         } catch let error { print(error) }
 

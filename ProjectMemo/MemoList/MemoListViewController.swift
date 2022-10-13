@@ -77,7 +77,7 @@ final class MemoListViewController: BaseViewController {
         configureTableView()
         configureToolBars()
         configureSearchBars()
-        print("Realm is located at:", repository.localRealm.configuration.fileURL!)
+        aboutRealm()
     }
     
     private func configureNavi() {
@@ -133,6 +133,17 @@ final class MemoListViewController: BaseViewController {
         self.navigationItem.searchController = searchController
         self.navigationItem.hidesSearchBarWhenScrolling = false
         searchController.searchResultsUpdater = self
+    }
+    
+    func aboutRealm() {
+        print("Realm is located at:", repository.localRealm.configuration.fileURL!)
+        
+        do {
+            let version = try schemaVersionAtURL(repository.localRealm.configuration.fileURL!)
+            print("Schema Version: \(version)")
+        } catch {
+            print(error)
+        }
     }
 
 }
@@ -394,7 +405,8 @@ extension MemoListViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         
         guard let text = searchController.searchBar.text else { return }
-            MemoStatus.searchResults = tasks.where { $0.titleMemo.contains(text, options: .caseInsensitive) || $0.mainMemo.contains(text, options: .caseInsensitive) }
+            MemoStatus.searchResults = tasks.where {
+                $0.titleMemo.contains(text, options: .caseInsensitive) || $0.mainMemo.contains(text, options: .caseInsensitive) }
         
         textSearched = text
         guard let numbers = numberFormatter.string(for: tasks.count) else { return }

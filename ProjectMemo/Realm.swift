@@ -14,6 +14,7 @@ class Memo: Object {
     @Persisted var mainMemo: String?
     @Persisted var dateRegistered = Date()
     @Persisted var pinned: Bool
+    @Persisted var intro: String?
     
     @Persisted(primaryKey: true) var objectId: ObjectId
     

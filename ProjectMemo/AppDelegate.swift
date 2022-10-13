@@ -7,6 +7,8 @@
 
 import UIKit
 
+import RealmSwift
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -14,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        aboutRealmMigration()
         return true
     }
 
@@ -34,3 +37,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+
+// MARK: - Extension: Realm Migration
+
+extension AppDelegate {
+    func aboutRealmMigration() {
+        
+        let config = Realm.Configuration(schemaVersion: 1) { migration, oldSchemaVersion in
+            
+            // Memo Realm의 intro: String 추가
+            if oldSchemaVersion < 1 { }
+            
+            
+            
+            
+            
+        }
+        
+        Realm.Configuration.defaultConfiguration = config
+    }
+}

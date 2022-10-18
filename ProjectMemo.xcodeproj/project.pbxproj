@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		AD0DF7A228C1D261003F648C /* SplitText+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0DF7A128C1D261003F648C /* SplitText+Extension.swift */; };
-		AD0DF7A428C1E6B5003F648C /* SecondRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0DF7A328C1E6B5003F648C /* SecondRealm.swift */; };
-		AD0DF7A628C1E74B003F648C /* SubMemoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0DF7A528C1E74B003F648C /* SubMemoRepository.swift */; };
 		AD6CCA6828BF2C2700C6C5A8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6CCA6728BF2C2700C6C5A8 /* AppDelegate.swift */; };
 		AD6CCA6A28BF2C2700C6C5A8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6CCA6928BF2C2700C6C5A8 /* SceneDelegate.swift */; };
 		AD6CCA6F28BF2C2700C6C5A8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD6CCA6D28BF2C2700C6C5A8 /* Main.storyboard */; };
@@ -27,12 +25,12 @@
 		AD6CCA9C28BF42E700C6C5A8 /* Transitions+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6CCA9B28BF42E700C6C5A8 /* Transitions+Extension.swift */; };
 		AD6CCA9E28BF433F00C6C5A8 /* UIAlertViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6CCA9D28BF433F00C6C5A8 /* UIAlertViewController+Extension.swift */; };
 		AD78E23328BF4DF30028AF65 /* UINavigationBar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD78E23228BF4DF30028AF65 /* UINavigationBar+Extension.swift */; };
-		AD7F7A4428BFC6BD00E299BA /* Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7F7A4328BFC6BD00E299BA /* Realm.swift */; };
+		AD7F7A4428BFC6BD00E299BA /* Memo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7F7A4328BFC6BD00E299BA /* Memo.swift */; };
 		AD7F7A4628BFC6C500E299BA /* MemoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7F7A4528BFC6C500E299BA /* MemoRepository.swift */; };
 		AD849C5828C32DFE00115CEA /* StatusOfMemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD849C5728C32DFE00115CEA /* StatusOfMemo.swift */; };
+		ADD349C428FE889F003BDC4F /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = ADD349C328FE889F003BDC4F /* Realm */; };
+		ADD349C628FE889F003BDC4F /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = ADD349C528FE889F003BDC4F /* RealmSwift */; };
 		ADF044D228BF5377006D69E8 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = ADF044D128BF5377006D69E8 /* SnapKit */; };
-		ADF044D528BF53AB006D69E8 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = ADF044D428BF53AB006D69E8 /* Realm */; };
-		ADF044D728BF53AB006D69E8 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = ADF044D628BF53AB006D69E8 /* RealmSwift */; };
 		ADF044DA28BF53C0006D69E8 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = ADF044D928BF53C0006D69E8 /* Zip */; };
 		ADF044DD28BF53F4006D69E8 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = ADF044DC28BF53F4006D69E8 /* Toast */; };
 		ADF044DF28BF544C006D69E8 /* MemoListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADF044DE28BF544C006D69E8 /* MemoListTableViewCell.swift */; };
@@ -43,8 +41,6 @@
 
 /* Begin PBXFileReference section */
 		AD0DF7A128C1D261003F648C /* SplitText+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SplitText+Extension.swift"; sourceTree = "<group>"; };
-		AD0DF7A328C1E6B5003F648C /* SecondRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondRealm.swift; sourceTree = "<group>"; };
-		AD0DF7A528C1E74B003F648C /* SubMemoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubMemoRepository.swift; sourceTree = "<group>"; };
 		AD6CCA6428BF2C2700C6C5A8 /* ProjectMemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProjectMemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD6CCA6728BF2C2700C6C5A8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AD6CCA6928BF2C2700C6C5A8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -63,7 +59,7 @@
 		AD6CCA9B28BF42E700C6C5A8 /* Transitions+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Transitions+Extension.swift"; sourceTree = "<group>"; };
 		AD6CCA9D28BF433F00C6C5A8 /* UIAlertViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertViewController+Extension.swift"; sourceTree = "<group>"; };
 		AD78E23228BF4DF30028AF65 /* UINavigationBar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationBar+Extension.swift"; sourceTree = "<group>"; };
-		AD7F7A4328BFC6BD00E299BA /* Realm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Realm.swift; sourceTree = "<group>"; };
+		AD7F7A4328BFC6BD00E299BA /* Memo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memo.swift; sourceTree = "<group>"; };
 		AD7F7A4528BFC6C500E299BA /* MemoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoRepository.swift; sourceTree = "<group>"; };
 		AD849C5728C32DFE00115CEA /* StatusOfMemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusOfMemo.swift; sourceTree = "<group>"; };
 		ADF044DE28BF544C006D69E8 /* MemoListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoListTableViewCell.swift; sourceTree = "<group>"; };
@@ -77,12 +73,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADD349C628FE889F003BDC4F /* RealmSwift in Frameworks */,
 				ADF044DD28BF53F4006D69E8 /* Toast in Frameworks */,
-				ADF044D728BF53AB006D69E8 /* RealmSwift in Frameworks */,
-				ADF044D528BF53AB006D69E8 /* Realm in Frameworks */,
 				AD6CCA7D28BF2C8D00C6C5A8 /* Hero in Frameworks */,
 				ADF044D228BF5377006D69E8 /* SnapKit in Frameworks */,
 				ADF044DA28BF53C0006D69E8 /* Zip in Frameworks */,
+				ADD349C428FE889F003BDC4F /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,10 +191,8 @@
 		AD7F7A4228BFC6B100E299BA /* Realm */ = {
 			isa = PBXGroup;
 			children = (
-				AD7F7A4328BFC6BD00E299BA /* Realm.swift */,
-				AD0DF7A328C1E6B5003F648C /* SecondRealm.swift */,
+				AD7F7A4328BFC6BD00E299BA /* Memo.swift */,
 				AD7F7A4528BFC6C500E299BA /* MemoRepository.swift */,
-				AD0DF7A528C1E74B003F648C /* SubMemoRepository.swift */,
 			);
 			name = Realm;
 			sourceTree = "<group>";
@@ -230,10 +224,10 @@
 			packageProductDependencies = (
 				AD6CCA7C28BF2C8D00C6C5A8 /* Hero */,
 				ADF044D128BF5377006D69E8 /* SnapKit */,
-				ADF044D428BF53AB006D69E8 /* Realm */,
-				ADF044D628BF53AB006D69E8 /* RealmSwift */,
 				ADF044D928BF53C0006D69E8 /* Zip */,
 				ADF044DC28BF53F4006D69E8 /* Toast */,
+				ADD349C328FE889F003BDC4F /* Realm */,
+				ADD349C528FE889F003BDC4F /* RealmSwift */,
 			);
 			productName = ProjectMemo;
 			productReference = AD6CCA6428BF2C2700C6C5A8 /* ProjectMemo.app */;
@@ -266,9 +260,9 @@
 			packageReferences = (
 				AD6CCA7B28BF2C8D00C6C5A8 /* XCRemoteSwiftPackageReference "Hero" */,
 				ADF044D028BF5377006D69E8 /* XCRemoteSwiftPackageReference "SnapKit" */,
-				ADF044D328BF53AB006D69E8 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				ADF044D828BF53C0006D69E8 /* XCRemoteSwiftPackageReference "Zip" */,
 				ADF044DB28BF53F4006D69E8 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
+				ADD349C228FE889F003BDC4F /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = AD6CCA6528BF2C2700C6C5A8 /* Products */;
 			projectDirPath = "";
@@ -307,7 +301,6 @@
 				ADF9015528C0FD4B006A987D /* Date+Extension.swift in Sources */,
 				AD78E23328BF4DF30028AF65 /* UINavigationBar+Extension.swift in Sources */,
 				AD6CCA8E28BF400600C6C5A8 /* WalkThroughView.swift in Sources */,
-				AD0DF7A628C1E74B003F648C /* SubMemoRepository.swift in Sources */,
 				AD6CCA9628BF413200C6C5A8 /* EditingView.swift in Sources */,
 				AD6CCA8B28BF3F9800C6C5A8 /* MemoListView.swift in Sources */,
 				ADF044E328BF83A6006D69E8 /* WalkThroughViewController.swift in Sources */,
@@ -315,11 +308,10 @@
 				ADF044DF28BF544C006D69E8 /* MemoListTableViewCell.swift in Sources */,
 				AD6CCA9C28BF42E700C6C5A8 /* Transitions+Extension.swift in Sources */,
 				AD6CCA9928BF428B00C6C5A8 /* Reusable+Protocol.swift in Sources */,
-				AD0DF7A428C1E6B5003F648C /* SecondRealm.swift in Sources */,
 				AD7F7A4628BFC6C500E299BA /* MemoRepository.swift in Sources */,
 				AD6CCA6828BF2C2700C6C5A8 /* AppDelegate.swift in Sources */,
 				AD6CCA6A28BF2C2700C6C5A8 /* SceneDelegate.swift in Sources */,
-				AD7F7A4428BFC6BD00E299BA /* Realm.swift in Sources */,
+				AD7F7A4428BFC6BD00E299BA /* Memo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -476,7 +468,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -484,6 +476,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jhee.ProjectMemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -507,7 +502,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -515,6 +510,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jhee.ProjectMemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -553,20 +551,20 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		ADD349C228FE889F003BDC4F /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				kind = exactVersion;
+				version = 10.32.0;
+			};
+		};
 		ADF044D028BF5377006D69E8 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 5.0.0;
-			};
-		};
-		ADF044D328BF53AB006D69E8 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/realm/realm-swift.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 10.0.0;
 			};
 		};
 		ADF044D828BF53C0006D69E8 /* XCRemoteSwiftPackageReference "Zip" */ = {
@@ -593,20 +591,20 @@
 			package = AD6CCA7B28BF2C8D00C6C5A8 /* XCRemoteSwiftPackageReference "Hero" */;
 			productName = Hero;
 		};
+		ADD349C328FE889F003BDC4F /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ADD349C228FE889F003BDC4F /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		ADD349C528FE889F003BDC4F /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ADD349C228FE889F003BDC4F /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
 		ADF044D128BF5377006D69E8 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = ADF044D028BF5377006D69E8 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
-		};
-		ADF044D428BF53AB006D69E8 /* Realm */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = ADF044D328BF53AB006D69E8 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = Realm;
-		};
-		ADF044D628BF53AB006D69E8 /* RealmSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = ADF044D328BF53AB006D69E8 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = RealmSwift;
 		};
 		ADF044D928BF53C0006D69E8 /* Zip */ = {
 			isa = XCSwiftPackageProductDependency;

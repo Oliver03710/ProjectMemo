@@ -27,9 +27,9 @@
 		AD78E23328BF4DF30028AF65 /* UINavigationBar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD78E23228BF4DF30028AF65 /* UINavigationBar+Extension.swift */; };
 		AD7F7A4428BFC6BD00E299BA /* Memo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7F7A4328BFC6BD00E299BA /* Memo.swift */; };
 		AD7F7A4628BFC6C500E299BA /* MemoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7F7A4528BFC6C500E299BA /* MemoRepository.swift */; };
-		AD849C5828C32DFE00115CEA /* StatusOfMemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD849C5728C32DFE00115CEA /* StatusOfMemo.swift */; };
 		ADD349C428FE889F003BDC4F /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = ADD349C328FE889F003BDC4F /* Realm */; };
 		ADD349C628FE889F003BDC4F /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = ADD349C528FE889F003BDC4F /* RealmSwift */; };
+		ADD349C828FE8B67003BDC4F /* UserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD349C728FE8B67003BDC4F /* UserDefaultsHelper.swift */; };
 		ADF044D228BF5377006D69E8 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = ADF044D128BF5377006D69E8 /* SnapKit */; };
 		ADF044DA28BF53C0006D69E8 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = ADF044D928BF53C0006D69E8 /* Zip */; };
 		ADF044DD28BF53F4006D69E8 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = ADF044DC28BF53F4006D69E8 /* Toast */; };
@@ -61,7 +61,7 @@
 		AD78E23228BF4DF30028AF65 /* UINavigationBar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationBar+Extension.swift"; sourceTree = "<group>"; };
 		AD7F7A4328BFC6BD00E299BA /* Memo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memo.swift; sourceTree = "<group>"; };
 		AD7F7A4528BFC6C500E299BA /* MemoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoRepository.swift; sourceTree = "<group>"; };
-		AD849C5728C32DFE00115CEA /* StatusOfMemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusOfMemo.swift; sourceTree = "<group>"; };
+		ADD349C728FE8B67003BDC4F /* UserDefaultsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHelper.swift; sourceTree = "<group>"; };
 		ADF044DE28BF544C006D69E8 /* MemoListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoListTableViewCell.swift; sourceTree = "<group>"; };
 		ADF044E028BF5471006D69E8 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		ADF044E228BF83A6006D69E8 /* WalkThroughViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkThroughViewController.swift; sourceTree = "<group>"; };
@@ -200,7 +200,7 @@
 		AD849C5428C32C7B00115CEA /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				AD849C5728C32DFE00115CEA /* StatusOfMemo.swift */,
+				ADD349C728FE8B67003BDC4F /* UserDefaultsHelper.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -291,11 +291,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADD349C828FE8B67003BDC4F /* UserDefaultsHelper.swift in Sources */,
 				ADF044E128BF5471006D69E8 /* BaseTableViewCell.swift in Sources */,
 				AD0DF7A228C1D261003F648C /* SplitText+Extension.swift in Sources */,
 				AD6CCA8128BF30FF00C6C5A8 /* BaseViewController.swift in Sources */,
 				AD6CCA9428BF411200C6C5A8 /* EditingViewController.swift in Sources */,
-				AD849C5828C32DFE00115CEA /* StatusOfMemo.swift in Sources */,
 				AD6CCA8928BF3F7000C6C5A8 /* MemoListViewController.swift in Sources */,
 				AD6CCA9E28BF433F00C6C5A8 /* UIAlertViewController+Extension.swift in Sources */,
 				ADF9015528C0FD4B006A987D /* Date+Extension.swift in Sources */,

@@ -9,7 +9,7 @@ import UIKit
 
 extension UIViewController {
     
-    func showNaviBars( naviTitle: String?, naviBarTintColor: UIColor) {
+    func showNaviBars(naviTitle: String?, naviBarTintColor: UIColor) {
         
         let barAppearance = UINavigationBarAppearance()
         barAppearance.backgroundColor = .systemBackground

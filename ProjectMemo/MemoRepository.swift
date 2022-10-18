@@ -9,7 +9,7 @@ import UIKit
 
 import RealmSwift
 
-protocol MemoRepositoryType {
+private protocol MemoRepositoryType: AnyObject {
     func addItem(item: Memo, objectId: ObjectId)
     func fetchMemo() -> Results<Memo>
     func updateStateOfPin(item: Memo)
@@ -17,16 +17,18 @@ protocol MemoRepositoryType {
     func deleteItem(item: Memo)
 }
 
-class MemoRepository: MemoRepositoryType {
-
+final class MemoRepository: MemoRepositoryType {
+    
     let localRealm = try! Realm()
     
     func addItem(item: Memo, objectId: ObjectId) {
-        
         do {
-            try localRealm.write { localRealm.add(item) }
-        } catch let error { print(error) }
-        
+            try localRealm.write {
+                localRealm.add(item)
+            }
+        } catch let error {
+            print(error)
+        }
     }
     
     func fetchMemo() -> Results<Memo> {
@@ -34,33 +36,34 @@ class MemoRepository: MemoRepositoryType {
     }
     
     func updateStateOfPin(item: Memo) {
-        
         do {
             try localRealm.write {
                 item.pinned.toggle()
             }
-        } catch let error { print(error) }
-
+        } catch let error {
+            print(error)
+        }
     }
     
     func updateMemo(item: Memo, title: String, mainText: String?) {
-        
         do {
             try localRealm.write {
                 item.titleMemo = title
                 item.mainMemo = mainText
                 item.dateRegistered = Date()
             }
-        } catch let error { print(error) }
-
+        } catch let error {
+            print(error)
+        }
     }
     
     func deleteItem(item: Memo) {
-        
         do {
-            try localRealm.write { localRealm.delete(item) }
-        } catch let error { print(error) }
-        
+            try localRealm.write {
+                localRealm.delete(item)
+            }
+        } catch let error {
+            print(error)
+        }
     }
-    
 }

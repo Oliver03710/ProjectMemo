@@ -9,17 +9,33 @@ import UIKit
 
 import RealmSwift
 
+enum IsPinned {
+    case pinned, unpinned, none
+}
+
 private protocol MemoRepositoryType: AnyObject {
     func addItem(item: Memo, objectId: ObjectId)
-    func fetchMemo() -> Results<Memo>
+    func fetchMemo(_ isPinned: IsPinned) -> Results<Memo>
     func updateStateOfPin(item: Memo)
     func updateMemo(item: Memo, title: String, mainText: String?)
     func deleteItem(item: Memo)
 }
 
 final class MemoRepository: MemoRepositoryType {
+
+    // MARK: - Properties
     
+    static let shared = MemoRepository()
     let localRealm = try! Realm()
+    private var tasks: Results<Memo>!
+    
+    
+    // MARK: - Init
+    
+    private init() { }
+    
+    
+    // MARK: - Helper Functions
     
     func addItem(item: Memo, objectId: ObjectId) {
         do {
@@ -31,8 +47,19 @@ final class MemoRepository: MemoRepositoryType {
         }
     }
     
-    func fetchMemo() -> Results<Memo> {
-        return localRealm.objects(Memo.self).sorted(byKeyPath: "dateRegistered", ascending: false)
+    func fetchMemo(_ isPinned: IsPinned) -> Results<Memo> {
+        tasks = localRealm.objects(Memo.self).sorted(byKeyPath: "dateRegistered", ascending: false)
+        
+        switch isPinned {
+        case .pinned:
+            let pinned = tasks.where { $0.pinned == true }
+            return pinned
+        case .unpinned:
+            let unpinned = tasks.where { $0.pinned == false }
+            return unpinned
+        case .none:
+            return tasks
+        }
     }
     
     func updateStateOfPin(item: Memo) {

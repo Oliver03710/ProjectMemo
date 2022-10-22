@@ -87,25 +87,24 @@ class MemoListTableViewCell: BaseTableViewCell {
         
     }
     
-    func setComponents(item: Memo) {
-        titleLabel.text = item.titleMemo
-        mainTextlLabel.text = item.mainMemo == nil ? "추가 텍스트 없음" : item.mainMemo
-        dateLabel.text = item.dateRegistered.setDateFormat()
-    }
-    
-    func isFilteringSetComponents(item: Memo, textSearched: String) {
+    func setComponents(item: Memo, textSearched: String, isFlitering: Bool) {
         titleLabel.text = item.titleMemo
         mainTextlLabel.text = item.mainMemo == nil ? "추가 텍스트 없음" : item.mainMemo
         
-        let titleAttString = NSMutableAttributedString(string: titleLabel.text!)
-        let range: NSRange = (titleLabel.text! as NSString).range(of: textSearched, options: .caseInsensitive)
-        titleAttString.addAttribute(.foregroundColor, value: UIColor.orange, range: range)
-        titleLabel.attributedText = titleAttString
-        
-        let mainTextAttString = NSMutableAttributedString(string: titleLabel.text!)
-        let range2: NSRange = (titleLabel.text! as NSString).range(of: textSearched, options: .caseInsensitive)
-        mainTextAttString.addAttribute(.foregroundColor, value: UIColor.orange, range: range2)
-        mainTextlLabel.attributedText = mainTextAttString
+        if isFlitering {
+            let titleAttString = NSMutableAttributedString(string: titleLabel.text!)
+            let range: NSRange = (titleLabel.text! as NSString).range(of: textSearched, options: .caseInsensitive)
+            titleAttString.addAttribute(.foregroundColor, value: UIColor.orange, range: range)
+            titleLabel.attributedText = titleAttString
+            
+            let mainTextAttString = NSMutableAttributedString(string: titleLabel.text!)
+            let range2: NSRange = (titleLabel.text! as NSString).range(of: textSearched, options: .caseInsensitive)
+            mainTextAttString.addAttribute(.foregroundColor, value: UIColor.orange, range: range2)
+            mainTextlLabel.attributedText = mainTextAttString
+        } else {
+            titleLabel.textColor = .label
+            mainTextlLabel.textColor = .label
+        }
         
         dateLabel.text = item.dateRegistered.setDateFormat()
     }

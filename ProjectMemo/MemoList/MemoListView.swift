@@ -19,7 +19,13 @@ class MemoListView: BaseView {
         tv.keyboardDismissMode = .onDrag
         return tv
     }()
-    
+
+    let numberFormatter: NumberFormatter = {
+        let nf = NumberFormatter()
+        nf.numberStyle = .decimal
+        return nf
+    }()
+        
     
     // MARK: - Init
     
@@ -36,15 +42,14 @@ class MemoListView: BaseView {
     
     override func configureUI() {
         self.backgroundColor = .systemBackground
-        [tableView].forEach { self.addSubview($0) }
+        
     }
     
     override func setConstraints() {
+        self.addSubview(tableView)
         
         tableView.snp.makeConstraints { make in
             make.top.leading.trailing.bottom.equalTo(self.safeAreaLayoutGuide)
         }
-        
     }
-    
 }

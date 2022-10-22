@@ -15,11 +15,9 @@ final class EditingViewController: BaseViewController {
     // MARK: - Properties
     
     let editingView = EditingView()
-    let repository = MemoRepository()
-    var tasks: Results<Memo>!
-    var indexPath: IndexPath!
-    var objectId: ObjectId!
-    var backButtonTitle = ""
+    let viewModel = EditViewModel()
+    var indexPath: IndexPath?
+    var objectId: ObjectId?
     
     
     // MARK: - Init
@@ -39,24 +37,25 @@ final class EditingViewController: BaseViewController {
         let title = splitText(editingView.textView.text).0
         let mainText = splitText(editingView.textView.text).1
         
-        guard let id = objectId else {
-            if !editingView.textView.text.isEmpty {
+        guard let id = objectId, let indexPath = indexPath else {
+            if viewModel.isEditing.value {
                 let task = Memo(titleMemo: title, mainMemo: mainText, dateRegistered: Date())
-                repository.addItem(item: task, objectId: task.objectId)
-                showActivityViewController()
+                MemoRepository.shared.addItem(item: task, objectId: task.objectId)
+                showActivityViewController(editingView.textView.text)
                 return
             }
             return
         }
         
-        if indexPath.section == 0 && tasks[indexPath.row].objectId == id && (tasks[indexPath.row].titleMemo != title || tasks[indexPath.row].mainMemo != mainText) {
-            print(indexPath.section, id)
-            repository.updateMemo(item: tasks[indexPath.row], title: title, mainText: mainText)
-        } else if indexPath.section == 1 && tasks[indexPath.row].objectId == id && (tasks[indexPath.row].titleMemo != title || tasks[indexPath.row].mainMemo != mainText) {
-            repository.updateMemo(item: tasks[indexPath.row], title: title, mainText: mainText)
-            print(indexPath.section, id)
+        if indexPath.section == 0 && viewModel.memo.value[indexPath.row].objectId == id && (viewModel.memo.value[indexPath.row].titleMemo != title || viewModel.memo.value[indexPath.row].mainMemo != mainText) {
+            
+            MemoRepository.shared.updateMemo(item: viewModel.memo.value[indexPath.row], title: title, mainText: mainText)
+            
+        } else if indexPath.section == 1 && viewModel.memo.value[indexPath.row].objectId == id && (viewModel.memo.value[indexPath.row].titleMemo != title || viewModel.memo.value[indexPath.row].mainMemo != mainText) {
+            
+            MemoRepository.shared.updateMemo(item: viewModel.memo.value[indexPath.row], title: title, mainText: mainText)
         }
-        showActivityViewController()
+        showActivityViewController(editingView.textView.text)
     }
     
     @objc func saveData() {
@@ -75,6 +74,15 @@ final class EditingViewController: BaseViewController {
     override func configureUI() {
         configureNavi()
         configueEdgeGesture()
+        bindData()
+    }
+    
+    func bindData() {
+        viewModel.isEditing.bind { _ in
+            guard let text = self.editingView.textView.text else { return }
+            self.viewModel.isEditing.value = text.isEmpty ? false : true
+            print(self.viewModel.isEditing.value)
+        }
     }
     
     private func configureNavi() {
@@ -87,7 +95,7 @@ final class EditingViewController: BaseViewController {
         
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "chevron.left"), for: .normal)
-        button.setTitle("\(backButtonTitle)", for: .normal)
+        button.setTitle("\(viewModel.backButtonTitle.value)", for: .normal)
         button.sizeToFit()
         button.addTarget(self, action: #selector(saveData), for: .touchUpInside)
         let leftBarButton = UIBarButtonItem(customView: button)
@@ -106,74 +114,27 @@ final class EditingViewController: BaseViewController {
     private func savingData() {
         let title = splitText(editingView.textView.text).0
         let mainText = splitText(editingView.textView.text).1
-        guard let id = objectId else {
+        
+        guard let id = objectId, let indexPath = indexPath else {
             if !editingView.textView.text.isEmpty {
                 let task = Memo(titleMemo: title, mainMemo: mainText, dateRegistered: Date())
-                repository.addItem(item: task, objectId: task.objectId)
-                navigationController?.navigationBar.prefersLargeTitles = true
-                self.navigationController?.popViewController(animated: true)
-                return
-            } else {
-                navigationController?.navigationBar.prefersLargeTitles = true
-                self.navigationController?.popViewController(animated: true)
+                MemoRepository.shared.addItem(item: task, objectId: task.objectId)
             }
+            navigationController?.navigationBar.prefersLargeTitles = true
+            self.navigationController?.popViewController(animated: true)
             return
         }
-        if indexPath.section == 0 && tasks[indexPath.row].objectId == id && (tasks[indexPath.row].titleMemo != title || tasks[indexPath.row].mainMemo != mainText) {
-            print(indexPath.section, id)
-            repository.updateMemo(item: tasks[indexPath.row], title: title, mainText: mainText)
-            navigationController?.navigationBar.prefersLargeTitles = true
-            self.navigationController?.popViewController(animated: true)
-        } else if indexPath.section == 1 && tasks[indexPath.row].objectId == id && (tasks[indexPath.row].titleMemo != title || tasks[indexPath.row].mainMemo != mainText) {
-            repository.updateMemo(item: tasks[indexPath.row], title: title, mainText: mainText)
-            print(indexPath.section, id)
-            navigationController?.navigationBar.prefersLargeTitles = true
-            self.navigationController?.popViewController(animated: true)
-        } else {
-            navigationController?.navigationBar.prefersLargeTitles = true
-            self.navigationController?.popViewController(animated: true)
+        
+        if indexPath.section == 0 && viewModel.memo.value[indexPath.row].objectId == id && (viewModel.memo.value[indexPath.row].titleMemo != title || viewModel.memo.value[indexPath.row].mainMemo != mainText) {
+            
+            MemoRepository.shared.updateMemo(item: viewModel.memo.value[indexPath.row], title: title, mainText: mainText)
+            
+        } else if indexPath.section == 1 && viewModel.memo.value[indexPath.row].objectId == id && (viewModel.memo.value[indexPath.row].titleMemo != title || viewModel.memo.value[indexPath.row].mainMemo != mainText) {
+            
+            MemoRepository.shared.updateMemo(item: viewModel.memo.value[indexPath.row], title: title, mainText: mainText)
+            
         }
+        navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationController?.popViewController(animated: true)
     }
-    
-    private func showToast(message : String, font: UIFont) {
-        let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width / 2 - 75, y: self.view.frame.size.height - 100, width: 150, height: 35))
-        toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
-        toastLabel.textColor = UIColor.white
-        toastLabel.font = font
-        toastLabel.textAlignment = .center;
-        toastLabel.text = message
-        toastLabel.alpha = 1.0
-        toastLabel.layer.cornerRadius = 10;
-        toastLabel.clipsToBounds  =  true
-        self.view.addSubview(toastLabel)
-        UIView.animate(withDuration: 4.0, delay: 0.1, options: .curveEaseOut, animations: {
-             toastLabel.alpha = 0.0
-        }, completion: {(isCompleted) in
-            toastLabel.removeFromSuperview()
-        })
-    }
-    
-    private func showActivityViewController() {
-        guard let text = editingView.textView.text else { return }
-        var shareObject = [Any]()
-        
-        shareObject.append(text)
-        
-        let activityViewController = UIActivityViewController(activityItems : shareObject, applicationActivities: nil)
-        activityViewController.popoverPresentationController?.sourceView = self.view
-        
-        self.present(activityViewController, animated: true, completion: nil)
-        
-        activityViewController.completionWithItemsHandler = { (activityType: UIActivity.ActivityType?, completed: Bool, arrayReturnedItems: [Any]?, error: Error?) in
-            if completed {
-                self.showToast(message: "share success", font: .systemFont(ofSize: 12))
-            } else {
-                self.showToast(message: "share cancel", font: .systemFont(ofSize: 12))
-            }
-            if let shareError = error {
-                self.showToast(message: "\(shareError.localizedDescription)", font: .systemFont(ofSize: 12))
-            }
-        }
-    }
-    
 }

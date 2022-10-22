@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-class EditingView: BaseView {
+final class EditingView: BaseView {
 
     // MARK: - Properties
     
@@ -34,15 +34,14 @@ class EditingView: BaseView {
     
     override func configureUI() {
         self.backgroundColor = .systemBackground
-        [textView].forEach { self.addSubview($0) }
     }
     
     override func setConstraints() {
+        self.addSubview(textView)
         
         textView.snp.makeConstraints { make in
             make.leading.top.equalTo(self.safeAreaLayoutGuide).offset(16)
             make.trailing.bottom.equalTo(self.safeAreaLayoutGuide).offset(-16)
         }
-        
     }
 }

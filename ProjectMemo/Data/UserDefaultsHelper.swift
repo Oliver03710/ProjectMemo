@@ -9,15 +9,18 @@ import Foundation
 
 final class UserdefaultsHelper {
     
-    private init() { }
-    
-    static let standard = UserdefaultsHelper()
-    
-    let userDefaults = UserDefaults.standard
+    // MARK: - Enum
     
     private enum Key: String {
         case isExecuted
     }
+    
+    
+    // MARK: - Properties
+    
+    static let standard = UserdefaultsHelper()
+    
+    let userDefaults = UserDefaults.standard
     
     var isExecuted: Bool {
         get {
@@ -27,6 +30,14 @@ final class UserdefaultsHelper {
             userDefaults.set(newValue, forKey: Key.isExecuted.rawValue)
         }
     }
+    
+    
+    // MARK: - Init
+    
+    private init() { }
+    
+    
+    // MARK: - Helper Functions
     
     func removeAll() {
         if let appDomain = Bundle.main.bundleIdentifier {

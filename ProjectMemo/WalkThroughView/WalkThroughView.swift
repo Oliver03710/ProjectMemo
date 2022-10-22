@@ -9,11 +9,11 @@ import UIKit
 
 import SnapKit
 
-class WalkThroughView: BaseView {
+final class WalkThroughView: BaseView {
     
     // MARK: - Properties
     
-    let basicView: UIView = {
+    private let basicView: UIView = {
         let view = UIView()
         view.clipsToBounds = true
         view.layer.cornerRadius = 16
@@ -21,7 +21,7 @@ class WalkThroughView: BaseView {
         return view
     }()
     
-    let introLabel: UILabel = {
+    private let introLabel: UILabel = {
         let label = UILabel()
         label.font = .boldSystemFont(ofSize: 20)
         label.numberOfLines = 0
@@ -57,11 +57,13 @@ class WalkThroughView: BaseView {
     override func configureUI() {
         self.backgroundColor = UIColor.black.withAlphaComponent(0.75)
         self.isOpaque = false
-        [basicView].forEach { self.addSubview($0) }
-        [confirmButton, introLabel].forEach { basicView.addSubview($0) }
+        
     }
     
     override func setConstraints() {
+        self.addSubview(basicView)
+        [confirmButton, introLabel].forEach { basicView.addSubview($0) }
+        
         basicView.snp.makeConstraints { make in
             make.center.equalTo(self)
             make.width.equalTo(UIScreen.main.bounds.width / 1.5)
@@ -69,16 +71,12 @@ class WalkThroughView: BaseView {
         }
         
         confirmButton.snp.makeConstraints { make in
-            make.bottom.equalTo(basicView.snp.bottom).offset(-20)
-            make.leading.equalTo(basicView.snp.leading).offset(20)
-            make.trailing.equalTo(basicView.snp.trailing).offset(-20)
+            make.directionalHorizontalEdges.bottom.equalTo(basicView.safeAreaLayoutGuide).inset(20)
             make.height.equalTo(44)
         }
         
         introLabel.snp.makeConstraints { make in
-            make.top.equalTo(basicView.snp.top).offset(20)
-            make.leading.equalTo(basicView.snp.leading).offset(20)
-            make.trailing.equalTo(basicView.snp.trailing).offset(-20)
+            make.directionalHorizontalEdges.top.equalTo(basicView.safeAreaLayoutGuide).inset(20)
             make.bottom.equalTo(confirmButton.snp.top).offset(10)
         }
         

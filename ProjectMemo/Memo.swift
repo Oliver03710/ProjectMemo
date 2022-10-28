@@ -14,15 +14,16 @@ class Memo: Object {
     @Persisted var mainMemo: String?
     @Persisted var dateRegistered = Date()
     @Persisted var pinned: Bool
-    @Persisted var intro: String?
+    @Persisted var photo: String?
     
     @Persisted(primaryKey: true) var objectId: ObjectId
     
-    convenience init(titleMemo: String, mainMemo: String?, dateRegistered: Date) {
+    convenience init(titleMemo: String, mainMemo: String?, dateRegistered: Date, photo: String?) {
         self.init()
         self.titleMemo = titleMemo
         self.mainMemo = mainMemo
         self.dateRegistered = dateRegistered
+        self.photo = photo
         self.pinned = false
     }
     

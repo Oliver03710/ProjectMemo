@@ -43,13 +43,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate {
     func aboutRealmMigration() {
         
-        let config = Realm.Configuration(schemaVersion: 2) { migration, oldSchemaVersion in
+        let config = Realm.Configuration(schemaVersion: 3) { migration, oldSchemaVersion in
             
-            // Memo Realm의 intro: String 추가
+            // Memo Realm의 intro: String? 추가
             if oldSchemaVersion < 1 { }
             
             // SubMemo Realm Table 삭제
             if oldSchemaVersion < 2 { }
+            
+            // Memo Realm의 intro: String? 삭제 및 photo: String? 추가
+            if oldSchemaVersion < 3 { }
             
         }
         

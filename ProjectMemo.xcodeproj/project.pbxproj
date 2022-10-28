@@ -27,6 +27,8 @@
 		AD78E23328BF4DF30028AF65 /* UINavigationBar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD78E23228BF4DF30028AF65 /* UINavigationBar+Extension.swift */; };
 		AD7F7A4428BFC6BD00E299BA /* Memo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7F7A4328BFC6BD00E299BA /* Memo.swift */; };
 		AD7F7A4628BFC6C500E299BA /* MemoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7F7A4528BFC6C500E299BA /* MemoRepository.swift */; };
+		AD8B0FCB290BE5D6000A410F /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = AD8B0FCA290BE5D6000A410F /* RxCocoa */; };
+		AD8B0FCD290BE5D6000A410F /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AD8B0FCC290BE5D6000A410F /* RxSwift */; };
 		AD99F36B290427D100E9F7F9 /* Results+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD99F36A290427D100E9F7F9 /* Results+Extension.swift */; };
 		ADA2AB0029003295005C578F /* Toast+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA2AAFF29003295005C578F /* Toast+Extension.swift */; };
 		ADA2AB0229003A05005C578F /* UIActivityViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA2AB0129003A05005C578F /* UIActivityViewController+Extension.swift */; };
@@ -110,8 +112,10 @@
 				ADD349C628FE889F003BDC4F /* RealmSwift in Frameworks */,
 				ADF044DD28BF53F4006D69E8 /* Toast in Frameworks */,
 				AD6CCA7D28BF2C8D00C6C5A8 /* Hero in Frameworks */,
+				AD8B0FCB290BE5D6000A410F /* RxCocoa in Frameworks */,
 				ADF044D228BF5377006D69E8 /* SnapKit in Frameworks */,
 				ADF044DA28BF53C0006D69E8 /* Zip in Frameworks */,
+				AD8B0FCD290BE5D6000A410F /* RxSwift in Frameworks */,
 				ADD349C428FE889F003BDC4F /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -303,6 +307,8 @@
 				ADF044DC28BF53F4006D69E8 /* Toast */,
 				ADD349C328FE889F003BDC4F /* Realm */,
 				ADD349C528FE889F003BDC4F /* RealmSwift */,
+				AD8B0FCA290BE5D6000A410F /* RxCocoa */,
+				AD8B0FCC290BE5D6000A410F /* RxSwift */,
 			);
 			productName = ProjectMemo;
 			productReference = AD6CCA6428BF2C2700C6C5A8 /* ProjectMemo.app */;
@@ -338,6 +344,7 @@
 				ADF044D828BF53C0006D69E8 /* XCRemoteSwiftPackageReference "Zip" */,
 				ADF044DB28BF53F4006D69E8 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 				ADD349C228FE889F003BDC4F /* XCRemoteSwiftPackageReference "realm-swift" */,
+				AD8B0FC9290BE5D6000A410F /* XCRemoteSwiftPackageReference "RxSwift" */,
 			);
 			productRefGroup = AD6CCA6528BF2C2700C6C5A8 /* Products */;
 			projectDirPath = "";
@@ -643,6 +650,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		AD8B0FC9290BE5D6000A410F /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
 		ADD349C228FE889F003BDC4F /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";
@@ -682,6 +697,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AD6CCA7B28BF2C8D00C6C5A8 /* XCRemoteSwiftPackageReference "Hero" */;
 			productName = Hero;
+		};
+		AD8B0FCA290BE5D6000A410F /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AD8B0FC9290BE5D6000A410F /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		AD8B0FCC290BE5D6000A410F /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AD8B0FC9290BE5D6000A410F /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
 		};
 		ADD349C328FE889F003BDC4F /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;

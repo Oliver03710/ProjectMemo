@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        aboutRealmMigration()
+//        aboutRealmMigration()
         return true
     }
 
@@ -43,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate {
     func aboutRealmMigration() {
         
-        let config = Realm.Configuration(schemaVersion: 3) { migration, oldSchemaVersion in
+        let config = Realm.Configuration(schemaVersion: 4) { migration, oldSchemaVersion in
             
             // Memo Realm의 intro: String? 추가
             if oldSchemaVersion < 1 { }
@@ -53,6 +53,21 @@ extension AppDelegate {
             
             // Memo Realm의 intro: String? 삭제 및 photo: String? 추가
             if oldSchemaVersion < 3 { }
+            
+            // photo 타입 변경: String -> Data
+            if oldSchemaVersion < 4 {
+                migration.enumerateObjects(ofType: Memo.className()) { oldObject, newObject in
+                    
+                    guard let new = newObject, let old = oldObject else { return }
+                    
+                    new["photo"] = old["photo"]
+                    
+                    if old["photo"] as? String == "https://images.unsplash.com/photo-1666367167963-7026e9fa8f5d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNTczNjh8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NjY5NTM2ODg&ixlib=rb-4.0.3&q=80&w=200" {
+                        new["photo"] = nil
+                    }
+                    
+                }
+            }
             
         }
         

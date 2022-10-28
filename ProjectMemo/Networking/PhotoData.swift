@@ -7,28 +7,20 @@
 
 import Foundation
 
-struct PhotoData: Codable {
-    let response: Response
-}
+struct RandomPhoto: Codable, Hashable {
+     
+    let urls: Urls
 
-struct Response: Codable {
-    let body: Body
-}
-
-struct Body: Codable {
-    let items: [Items]
-}
-
-struct Items: Codable {
-    let name, address, introduction, admin, phoneNumber, latitude, longitude: String
-    
     enum CodingKeys: String, CodingKey {
-        case name = "trrsrtNm"
-        case address = "rdnmadr"
-        case introduction = "trrsrtIntrcn"
-        case admin = "institutionNm"
-        case phoneNumber
-        case latitude
-        case longitude
+        case urls
+    }
+}
+
+struct Urls: Codable, Hashable {
+    let raw, full, regular, small, thumb, smallS3: String
+
+    enum CodingKeys: String, CodingKey {
+        case raw, full, regular, small, thumb
+        case smallS3 = "small_s3"
     }
 }

@@ -88,9 +88,13 @@ class MemoListTableViewCell: BaseTableViewCell {
     }
     
     func setComponents(item: Memo, textSearched: String, isFlitering: Bool) {
+        
         titleLabel.text = item.titleMemo
         mainTextlLabel.text = item.mainMemo == nil ? "추가 텍스트 없음" : item.mainMemo
-        
+        if let data = item.photo {
+            memoImageView.image = UIImage(data: data)
+        }
+
         if isFlitering {
             let titleAttString = NSMutableAttributedString(string: titleLabel.text!)
             let range: NSRange = (titleLabel.text! as NSString).range(of: textSearched, options: .caseInsensitive)

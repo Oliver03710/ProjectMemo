@@ -8,6 +8,8 @@
 import UIKit
 
 import RealmSwift
+import RxCocoa
+import RxSwift
 import Toast
 
 final class EditingViewController: BaseViewController {
@@ -18,6 +20,7 @@ final class EditingViewController: BaseViewController {
     let viewModel = EditViewModel()
     var indexPath: IndexPath?
     var objectId: ObjectId?
+    let disposeBag = DisposeBag()
     
     
     // MARK: - Init
@@ -117,8 +120,15 @@ final class EditingViewController: BaseViewController {
         
         guard let id = objectId, let indexPath = indexPath else {
             if !editingView.textView.text.isEmpty {
-                let task = Memo(titleMemo: title, mainMemo: mainText, dateRegistered: Date(), photo: nil)
-                MemoRepository.shared.addItem(item: task, objectId: task.objectId)
+                viewModel.decodeImage()
+                viewModel.randomPhoto
+                    .subscribe { data in
+                        DispatchQueue.main.async {
+                            let task = Memo(titleMemo: title, mainMemo: mainText, dateRegistered: Date(), photo: data)
+                            MemoRepository.shared.addItem(item: task, objectId: task.objectId)
+                        }
+                    }
+                    .disposed(by: disposeBag)
             }
             navigationController?.navigationBar.prefersLargeTitles = true
             self.navigationController?.popViewController(animated: true)

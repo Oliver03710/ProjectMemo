@@ -97,8 +97,8 @@ class MemoListTableViewCell: BaseTableViewCell {
             titleAttString.addAttribute(.foregroundColor, value: UIColor.orange, range: range)
             titleLabel.attributedText = titleAttString
             
-            let mainTextAttString = NSMutableAttributedString(string: titleLabel.text!)
-            let range2: NSRange = (titleLabel.text! as NSString).range(of: textSearched, options: .caseInsensitive)
+            let mainTextAttString = NSMutableAttributedString(string: mainTextlLabel.text!)
+            let range2: NSRange = (mainTextlLabel.text! as NSString).range(of: textSearched, options: .caseInsensitive)
             mainTextAttString.addAttribute(.foregroundColor, value: UIColor.orange, range: range2)
             mainTextlLabel.attributedText = mainTextAttString
         } else {

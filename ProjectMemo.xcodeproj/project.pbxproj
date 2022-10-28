@@ -27,8 +27,16 @@
 		AD78E23328BF4DF30028AF65 /* UINavigationBar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD78E23228BF4DF30028AF65 /* UINavigationBar+Extension.swift */; };
 		AD7F7A4428BFC6BD00E299BA /* Memo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7F7A4328BFC6BD00E299BA /* Memo.swift */; };
 		AD7F7A4628BFC6C500E299BA /* MemoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7F7A4528BFC6C500E299BA /* MemoRepository.swift */; };
+		AD99F36B290427D100E9F7F9 /* Results+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD99F36A290427D100E9F7F9 /* Results+Extension.swift */; };
 		ADA2AB0029003295005C578F /* Toast+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA2AAFF29003295005C578F /* Toast+Extension.swift */; };
 		ADA2AB0229003A05005C578F /* UIActivityViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA2AB0129003A05005C578F /* UIActivityViewController+Extension.swift */; };
+		ADB83A21290B1D1800359F65 /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB83A20290B1D1800359F65 /* CustomLabel.swift */; };
+		ADB83A26290B28A800359F65 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = ADB83A25290B28A800359F65 /* .gitignore */; };
+		ADB83A28290B28C000359F65 /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB83A27290B28C000359F65 /* APIKeys.swift */; };
+		ADB83A2A290B28FE00359F65 /* URLSession+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB83A29290B28FE00359F65 /* URLSession+Extension.swift */; };
+		ADB83A2C290B2A1200359F65 /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB83A2B290B2A1200359F65 /* Endpoints.swift */; };
+		ADB83A2E290B2A4D00359F65 /* PhotoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB83A2D290B2A4D00359F65 /* PhotoManager.swift */; };
+		ADB83A30290B2AB000359F65 /* PhotoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB83A2F290B2AB000359F65 /* PhotoData.swift */; };
 		ADD349C428FE889F003BDC4F /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = ADD349C328FE889F003BDC4F /* Realm */; };
 		ADD349C628FE889F003BDC4F /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = ADD349C528FE889F003BDC4F /* RealmSwift */; };
 		ADD349C828FE8B67003BDC4F /* UserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD349C728FE8B67003BDC4F /* UserDefaultsHelper.swift */; };
@@ -36,8 +44,6 @@
 		ADD349CD28FE8FCB003BDC4F /* Obserable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD349CC28FE8FCB003BDC4F /* Obserable.swift */; };
 		ADD349CF28FE97AE003BDC4F /* MemoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD349CE28FE97AE003BDC4F /* MemoListViewModel.swift */; };
 		ADD349D228FEAA32003BDC4F /* FolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD349D128FEAA32003BDC4F /* FolderViewController.swift */; };
-		ADD349D428FEAA8C003BDC4F /* TotalListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD349D328FEAA8C003BDC4F /* TotalListViewController.swift */; };
-		ADD349D628FEABB7003BDC4F /* TotalListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD349D528FEABB7003BDC4F /* TotalListView.swift */; };
 		ADD349D828FEAD14003BDC4F /* FolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD349D728FEAD14003BDC4F /* FolderView.swift */; };
 		ADD349DA28FEADAF003BDC4F /* TotalListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD349D928FEADAF003BDC4F /* TotalListViewModel.swift */; };
 		ADD349DC28FEB7F6003BDC4F /* FolderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD349DB28FEB7F6003BDC4F /* FolderViewModel.swift */; };
@@ -72,15 +78,21 @@
 		AD78E23228BF4DF30028AF65 /* UINavigationBar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationBar+Extension.swift"; sourceTree = "<group>"; };
 		AD7F7A4328BFC6BD00E299BA /* Memo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memo.swift; sourceTree = "<group>"; };
 		AD7F7A4528BFC6C500E299BA /* MemoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoRepository.swift; sourceTree = "<group>"; };
+		AD99F36A290427D100E9F7F9 /* Results+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Results+Extension.swift"; sourceTree = "<group>"; };
 		ADA2AAFF29003295005C578F /* Toast+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Toast+Extension.swift"; sourceTree = "<group>"; };
 		ADA2AB0129003A05005C578F /* UIActivityViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIActivityViewController+Extension.swift"; sourceTree = "<group>"; };
+		ADB83A20290B1D1800359F65 /* CustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
+		ADB83A25290B28A800359F65 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		ADB83A27290B28C000359F65 /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
+		ADB83A29290B28FE00359F65 /* URLSession+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Extension.swift"; sourceTree = "<group>"; };
+		ADB83A2B290B2A1200359F65 /* Endpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoints.swift; sourceTree = "<group>"; };
+		ADB83A2D290B2A4D00359F65 /* PhotoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoManager.swift; sourceTree = "<group>"; };
+		ADB83A2F290B2AB000359F65 /* PhotoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoData.swift; sourceTree = "<group>"; };
 		ADD349C728FE8B67003BDC4F /* UserDefaultsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHelper.swift; sourceTree = "<group>"; };
 		ADD349CA28FE8F9E003BDC4F /* EditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewModel.swift; sourceTree = "<group>"; };
 		ADD349CC28FE8FCB003BDC4F /* Obserable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Obserable.swift; sourceTree = "<group>"; };
 		ADD349CE28FE97AE003BDC4F /* MemoListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoListViewModel.swift; sourceTree = "<group>"; };
 		ADD349D128FEAA32003BDC4F /* FolderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderViewController.swift; sourceTree = "<group>"; };
-		ADD349D328FEAA8C003BDC4F /* TotalListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalListViewController.swift; sourceTree = "<group>"; };
-		ADD349D528FEABB7003BDC4F /* TotalListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalListView.swift; sourceTree = "<group>"; };
 		ADD349D728FEAD14003BDC4F /* FolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderView.swift; sourceTree = "<group>"; };
 		ADD349D928FEADAF003BDC4F /* TotalListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalListViewModel.swift; sourceTree = "<group>"; };
 		ADD349DB28FEB7F6003BDC4F /* FolderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderViewModel.swift; sourceTree = "<group>"; };
@@ -110,6 +122,7 @@
 		AD6CCA5B28BF2C2700C6C5A8 = {
 			isa = PBXGroup;
 			children = (
+				ADB83A25290B28A800359F65 /* .gitignore */,
 				AD6CCA6628BF2C2700C6C5A8 /* ProjectMemo */,
 				AD6CCA6528BF2C2700C6C5A8 /* Products */,
 			);
@@ -128,6 +141,7 @@
 			children = (
 				AD6CCA6728BF2C2700C6C5A8 /* AppDelegate.swift */,
 				AD6CCA6928BF2C2700C6C5A8 /* SceneDelegate.swift */,
+				ADB83A22290B286C00359F65 /* Networking */,
 				AD6CCA9728BF426E00C6C5A8 /* Protocols */,
 				AD6CCA7F28BF30C200C6C5A8 /* BaseComponents */,
 				AD6CCA9A28BF42CD00C6C5A8 /* Extensions */,
@@ -150,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				ADF044E028BF5471006D69E8 /* BaseTableViewCell.swift */,
+				ADB83A20290B1D1800359F65 /* CustomLabel.swift */,
 			);
 			path = Customs;
 			sourceTree = "<group>";
@@ -158,8 +173,8 @@
 			isa = PBXGroup;
 			children = (
 				AD6CCA7E28BF30AB00C6C5A8 /* Customs */,
-				AD6CCA8028BF30FF00C6C5A8 /* BaseViewController.swift */,
 				AD6CCA8228BF315E00C6C5A8 /* BaseView.swift */,
+				AD6CCA8028BF30FF00C6C5A8 /* BaseViewController.swift */,
 			);
 			path = BaseComponents;
 			sourceTree = "<group>";
@@ -210,6 +225,8 @@
 				AD0DF7A128C1D261003F648C /* SplitText+Extension.swift */,
 				ADA2AAFF29003295005C578F /* Toast+Extension.swift */,
 				ADA2AB0129003A05005C578F /* UIActivityViewController+Extension.swift */,
+				AD99F36A290427D100E9F7F9 /* Results+Extension.swift */,
+				ADB83A29290B28FE00359F65 /* URLSession+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -231,6 +248,17 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
+		ADB83A22290B286C00359F65 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				ADB83A27290B28C000359F65 /* APIKeys.swift */,
+				ADB83A2B290B2A1200359F65 /* Endpoints.swift */,
+				ADB83A2D290B2A4D00359F65 /* PhotoManager.swift */,
+				ADB83A2F290B2AB000359F65 /* PhotoData.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
 		ADD349C928FE8F84003BDC4F /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -248,8 +276,6 @@
 			children = (
 				ADD349D128FEAA32003BDC4F /* FolderViewController.swift */,
 				ADD349D728FEAD14003BDC4F /* FolderView.swift */,
-				ADD349D328FEAA8C003BDC4F /* TotalListViewController.swift */,
-				ADD349D528FEABB7003BDC4F /* TotalListView.swift */,
 			);
 			path = MemoFolder;
 			sourceTree = "<group>";
@@ -327,6 +353,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADB83A26290B28A800359F65 /* .gitignore in Resources */,
 				AD6CCA7428BF2C2A00C6C5A8 /* LaunchScreen.storyboard in Resources */,
 				AD6CCA7128BF2C2A00C6C5A8 /* Assets.xcassets in Resources */,
 				AD6CCA6F28BF2C2700C6C5A8 /* Main.storyboard in Resources */,
@@ -340,14 +367,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADB83A28290B28C000359F65 /* APIKeys.swift in Sources */,
 				ADD349C828FE8B67003BDC4F /* UserDefaultsHelper.swift in Sources */,
+				AD99F36B290427D100E9F7F9 /* Results+Extension.swift in Sources */,
 				ADF044E128BF5471006D69E8 /* BaseTableViewCell.swift in Sources */,
 				AD0DF7A228C1D261003F648C /* SplitText+Extension.swift in Sources */,
-				ADD349D428FEAA8C003BDC4F /* TotalListViewController.swift in Sources */,
 				AD6CCA8128BF30FF00C6C5A8 /* BaseViewController.swift in Sources */,
 				AD6CCA9428BF411200C6C5A8 /* EditingViewController.swift in Sources */,
 				ADD349DC28FEB7F6003BDC4F /* FolderViewModel.swift in Sources */,
-				ADD349D628FEABB7003BDC4F /* TotalListView.swift in Sources */,
+				ADB83A21290B1D1800359F65 /* CustomLabel.swift in Sources */,
 				AD6CCA8928BF3F7000C6C5A8 /* MemoListViewController.swift in Sources */,
 				AD6CCA9E28BF433F00C6C5A8 /* UIAlertViewController+Extension.swift in Sources */,
 				ADF9015528C0FD4B006A987D /* Date+Extension.swift in Sources */,
@@ -355,6 +383,7 @@
 				ADD349CB28FE8F9E003BDC4F /* EditViewModel.swift in Sources */,
 				AD78E23328BF4DF30028AF65 /* UINavigationBar+Extension.swift in Sources */,
 				AD6CCA8E28BF400600C6C5A8 /* WalkThroughView.swift in Sources */,
+				ADB83A2A290B28FE00359F65 /* URLSession+Extension.swift in Sources */,
 				AD6CCA9628BF413200C6C5A8 /* EditingView.swift in Sources */,
 				AD6CCA8B28BF3F9800C6C5A8 /* MemoListView.swift in Sources */,
 				ADF044E328BF83A6006D69E8 /* WalkThroughViewController.swift in Sources */,
@@ -362,12 +391,15 @@
 				ADD349D228FEAA32003BDC4F /* FolderViewController.swift in Sources */,
 				AD6CCA8328BF315E00C6C5A8 /* BaseView.swift in Sources */,
 				ADA2AB0229003A05005C578F /* UIActivityViewController+Extension.swift in Sources */,
+				ADB83A2C290B2A1200359F65 /* Endpoints.swift in Sources */,
 				ADF044DF28BF544C006D69E8 /* MemoListTableViewCell.swift in Sources */,
 				AD6CCA9C28BF42E700C6C5A8 /* Transitions+Extension.swift in Sources */,
 				ADD349D828FEAD14003BDC4F /* FolderView.swift in Sources */,
 				ADA2AB0029003295005C578F /* Toast+Extension.swift in Sources */,
 				ADD349DA28FEADAF003BDC4F /* TotalListViewModel.swift in Sources */,
+				ADB83A2E290B2A4D00359F65 /* PhotoManager.swift in Sources */,
 				AD6CCA9928BF428B00C6C5A8 /* Reusable+Protocol.swift in Sources */,
+				ADB83A30290B2AB000359F65 /* PhotoData.swift in Sources */,
 				AD7F7A4628BFC6C500E299BA /* MemoRepository.swift in Sources */,
 				AD6CCA6828BF2C2700C6C5A8 /* AppDelegate.swift in Sources */,
 				AD6CCA6A28BF2C2700C6C5A8 /* SceneDelegate.swift in Sources */,
@@ -447,7 +479,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -501,7 +533,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -523,7 +555,7 @@
 				INFOPLIST_FILE = ProjectMemo/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "윤준희";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -557,7 +589,7 @@
 				INFOPLIST_FILE = ProjectMemo/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "윤준희";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

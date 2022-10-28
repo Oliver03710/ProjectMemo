@@ -35,6 +35,11 @@ final class MemoListViewController: BaseViewController {
         super.viewDidLoad()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.memo.value = MemoRepository.shared.fetchMemo(.none)
+    }
+    
     
     // MARK: - Selectors
     
@@ -299,7 +304,7 @@ extension MemoListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
+        return 80
     }
     
 }

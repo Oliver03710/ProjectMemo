@@ -32,7 +32,7 @@ extension Date {
     }
     
     func setDateFormat() -> String {
-        guard let timeInterval = (self - Date()).day else { return "timeInterval Error" }
+        guard let timeInterval = (Date()-self).day else { return "timeInterval Error" }
         
         switch timeInterval {
         case let x where x >= 0 && x < 1: return toString()

@@ -13,35 +13,29 @@ class MemoListTableViewCell: BaseTableViewCell {
 
     // MARK: - Properties
     
-    let titleLabel: UILabel = {
-        let label = UILabel()
-        label.font = .boldSystemFont(ofSize: 16)
-        label.numberOfLines = 1
+    let titleLabel: CustomLabel = {
+        let label = CustomLabel(fontSize: 16)
         return label
     }()
     
-    let dateLabel: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 12)
+    let dateLabel: CustomLabel = {
+        let label = CustomLabel(fontSize: 12)
         label.textColor = .darkGray
-        label.numberOfLines = 1
         return label
     }()
     
-    let mainTextlLabel: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 12)
+    let mainTextlLabel: CustomLabel = {
+        let label = CustomLabel(fontSize: 12)
         label.textColor = .darkGray
-        label.numberOfLines = 1
         return label
     }()
     
-    lazy var stackView: UIStackView = {
-        let sv = UIStackView(arrangedSubviews: [dateLabel, mainTextlLabel])
-        sv.axis = .horizontal
-        sv.distribution = .equalCentering
-        sv.spacing = 8
-        return sv
+    let memoImageView: UIImageView = {
+        let iv = UIImageView(frame: .zero)
+        iv.contentMode = .scaleAspectFit
+        iv.image = UIImage(systemName: "photo")
+        iv.tintColor = .systemGray5
+        return iv
     }()
     
     
@@ -59,30 +53,36 @@ class MemoListTableViewCell: BaseTableViewCell {
     // MARK: - Helper Functions
     
     override func setUI() {
-        [titleLabel, stackView].forEach { self.addSubview($0) }
+        [memoImageView, titleLabel, dateLabel, mainTextlLabel].forEach { self.addSubview($0) }
     }
     
     override func setConstraints() {
-        titleLabel.snp.makeConstraints { make in
+        memoImageView.snp.makeConstraints { make in
             make.top.equalTo(self.snp.top).offset(10)
             make.leading.equalTo(self.snp.leading).offset(20)
+            make.bottom.equalTo(self.snp.bottom).offset(-10)
+            make.width.equalTo(memoImageView.snp.height)
+        }
+        
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalTo(self.snp.top).offset(10)
+            make.leading.equalTo(memoImageView.snp.trailing).offset(8)
             make.trailing.equalTo(self.snp.trailing).offset(-10)
             make.height.equalTo(16)
         }
         
-        stackView.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(4)
-            make.leading.equalTo(self.snp.leading).offset(20)
-            make.trailing.equalTo(self.snp.trailing).offset(-10)
-            make.bottom.equalTo(self.snp.bottom).offset(-10)
-        }
-        
         dateLabel.snp.makeConstraints { make in
-            make.width.equalTo(200).priority(999)
+            make.top.equalTo(titleLabel.snp.bottom).offset(4)
+            make.leading.equalTo(memoImageView.snp.trailing).offset(8)
+            make.bottom.equalTo(self.snp.bottom).offset(-10)
+            make.width.equalTo(self.snp.width).dividedBy(2)
         }
         
         mainTextlLabel.snp.makeConstraints { make in
-            make.width.equalTo(200)
+            make.top.equalTo(titleLabel.snp.bottom).offset(4)
+            make.leading.equalTo(dateLabel.snp.trailing)
+            make.bottom.equalTo(self.snp.bottom).offset(-10)
+            make.trailing.equalTo(self.snp.trailing).offset(-10)
         }
         
     }

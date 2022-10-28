@@ -14,8 +14,5 @@ final class FolderViewModel {
     // MARK: - Properties
     
     var memo: Observable<Results<Memo>> = Observable(MemoRepository.shared.fetchMemo(.none))
-    
-    
-    // MARK: - Helper Functions
-    
+
 }

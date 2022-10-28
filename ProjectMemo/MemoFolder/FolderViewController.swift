@@ -7,12 +7,14 @@
 
 import UIKit
 
-class FolderViewController: BaseViewController {
+import RealmSwift
+
+final class FolderViewController: BaseViewController {
 
     // MARK: - Properties
     
     private let folderView = FolderView()
-    private let viewModel = TotalListViewModel()
+    private let viewModel = FolderViewModel()
     
     
     // MARK: - Init
@@ -25,41 +27,58 @@ class FolderViewController: BaseViewController {
         super.viewDidLoad()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.memo.value = MemoRepository.shared.fetchMemo(.none)
+    }
+    
+    
+    // MARK: - Selectors
+    
+    @objc func toMemos() {
+        let vc = MemoListViewController()
+        transitionViewController(vc, transitionStyle: .push)
+    }
+    
     
     // MARK: - Helper Functions
     
     override func configureUI() {
-        setCollectionViewDelegate()
+        bindData()
+        configureNavi()
     }
     
-    private func setCollectionViewDelegate() {
-        folderView.collectionView.delegate = self
-        folderView.collectionView.dataSource = self
+    private func bindData() {
+        viewModel.memo.bind { [weak self] memo in
+            let pinned = memo.where { $0.pinned == true }.toArray()
+            let unPinned = memo.where { $0.pinned == false }.toArray()
+            
+            var snapshot = NSDiffableDataSourceSnapshot<FolderView.Sections, FolderView.Item>()
+            let sections = FolderView.Sections.allCases
+            snapshot.appendSections(sections)
+            self?.folderView.dataSource.apply(snapshot, animatingDifferences: false)
+            for section in sections {
+                var sectionSnapshot = NSDiffableDataSourceSectionSnapshot<FolderView.Item>()
+                let headerItem = FolderView.Item(title: "\(section.rawValue)")
+                sectionSnapshot.append([headerItem])
+                let items = section == .pinned ? pinned.map { FolderView.Item(title: "\($0.titleMemo)") } : unPinned.map { FolderView.Item(title: "\($0.titleMemo)") }
+                sectionSnapshot.append(items, to: headerItem)
+                sectionSnapshot.expand([headerItem])
+                self?.folderView.dataSource.apply(sectionSnapshot, to: section)
+            }
+        }
     }
-}
-
-
-// MARK: - Extension: UICollectionViewDelegate
-
-extension FolderViewController: UICollectionViewDelegate {
     
-}
-
-
-// MARK: - Extension: UICollectionViewDataSource
-
-extension FolderViewController: UICollectionViewDataSource {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.memo.value.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    private func configureNavi() {
         
-        let item = viewModel.memo.value[indexPath.item]
-        let cell = collectionView.dequeueConfiguredReusableCell(using: folderView.cellRegistration, for: indexPath, item: item)
+        showNaviBars(naviTitle: "메모 폴더", naviBarTintColor: .orange)
         
-        return cell
+        let transitionButton = UIBarButtonItem(title: "메모보기", style: .plain, target: self, action: #selector(toMemos))
+        
+        navigationItem.rightBarButtonItem = transitionButton
+        
+        navigationItem.largeTitleDisplayMode = .automatic
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.prompt = " "
     }
-    
 }

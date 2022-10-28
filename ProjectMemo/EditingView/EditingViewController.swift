@@ -39,7 +39,7 @@ final class EditingViewController: BaseViewController {
         
         guard let id = objectId, let indexPath = indexPath else {
             if viewModel.isEditing.value {
-                let task = Memo(titleMemo: title, mainMemo: mainText, dateRegistered: Date())
+                let task = Memo(titleMemo: title, mainMemo: mainText, dateRegistered: Date(), photo: nil)
                 MemoRepository.shared.addItem(item: task, objectId: task.objectId)
                 showActivityViewController(editingView.textView.text)
                 return
@@ -117,7 +117,7 @@ final class EditingViewController: BaseViewController {
         
         guard let id = objectId, let indexPath = indexPath else {
             if !editingView.textView.text.isEmpty {
-                let task = Memo(titleMemo: title, mainMemo: mainText, dateRegistered: Date())
+                let task = Memo(titleMemo: title, mainMemo: mainText, dateRegistered: Date(), photo: nil)
                 MemoRepository.shared.addItem(item: task, objectId: task.objectId)
             }
             navigationController?.navigationBar.prefersLargeTitles = true

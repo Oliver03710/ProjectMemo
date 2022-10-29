@@ -122,11 +122,10 @@ final class EditingViewController: BaseViewController {
             if !editingView.textView.text.isEmpty {
                 viewModel.decodeImage()
                 viewModel.randomPhoto
+                    .observe(on: MainScheduler.instance)
                     .subscribe { data in
-                        DispatchQueue.main.async {
-                            let task = Memo(titleMemo: title, mainMemo: mainText, dateRegistered: Date(), photo: data)
-                            MemoRepository.shared.addItem(item: task, objectId: task.objectId)
-                        }
+                        let task = Memo(titleMemo: title, mainMemo: mainText, dateRegistered: Date(), photo: data)
+                        MemoRepository.shared.addItem(item: task, objectId: task.objectId)
                     }
                     .disposed(by: disposeBag)
             }

@@ -25,15 +25,12 @@ final class EditViewModel {
     
     func decodeImage() {
         
-        PhotoManager.shared.requestPhotos { photo, error in
-            DispatchQueue.global().async { [weak self] in
-                guard let photo = photo?.urls.thumb, let url = URL(string: photo) else { return }
-                guard let data = try? Data(contentsOf: url) else { return }
-                self?.randomPhoto.onNext(data)
-            }
+        guard let request = PhotoManager.shared.setRequest() else { return }
+        
+        URLSession.request(RandomPhoto.self, endpoint: request) { [weak self] photo, error in
+            guard let photo = photo?.urls.thumb, let url = URL(string: photo) else { return }
+            guard let data = try? Data(contentsOf: url) else { return }
+            self?.randomPhoto.onNext(data)
         }
-        
-        
     }
-
 }
